@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f5f2" />
+    <meta name="description" content="OURS. 两个人的生活档案。照片、去过的地方和最近发生的小事，都在这里。" />
+    <title>OURS. — 两个人的生活档案</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f5f5f2'/%3E%3Ctext x='3' y='24' font-family='Arial' font-size='24' font-weight='900' fill='%23111111'%3EO%3C/text%3E%3Ccircle cx='26' cy='24' r='4' fill='%23f63c35'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script defer src="./script.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到内容</a>
+
+    <header class="site-header" id="top">
+      <a class="wordmark" href="#top" aria-label="OURS 首页">OURS<span>.</span></a>
+      <nav class="header-nav" aria-label="主导航">
+        <a href="#latest">最新</a>
+        <a href="#popular">热门</a>
+        <a href="#weekend">周末</a>
+        <a href="#places">地点</a>
+      </nav>
+      <div class="header-tools">
+        <button class="icon-button search-trigger" type="button" aria-label="搜索本站" data-search-open>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 5 5"/></svg>
+        </button>
+        <button class="icon-button menu-trigger" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu" data-menu-trigger>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+      <nav class="mobile-menu" id="mobile-menu" aria-label="手机导航">
+        <a href="#latest">最新</a><a href="#popular">热门</a><a href="#weekend">周末</a><a href="#places">地点</a><a href="#details">更多记录</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="latest page-width" id="latest" aria-labelledby="latest-title">
+        <div class="masthead-meta"><span>THE TWO-PERSON ARCHIVE</span><span>ISSUE 001 / OURS.</span></div>
+        <h1 id="latest-title">LATEST STORIES</h1>
+        <div class="section-rule"></div>
+
+        <div class="news-grid">
+          <div class="lead-column">
+            <article class="lead-story story" id="story-first" data-search-title="第 01 期：先把最近的事放上来">
+              <img class="lead-image" src="./assets/editorial-weekend.png" alt="两个人在桌边看地图、拍照的编辑插画" fetchpriority="high" />
+              <div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">首页记录</span></div>
+              <h2>第 01 期：先把最近的事放上来</h2>
+            </article>
+            <div class="lead-bottom">
+              <article class="small-story story" id="story-sea" data-search-title="去海边走了走，风比想象中大">
+                <img src="./assets/shoreline-memory.png" alt="两个人在海边散步的示意照片" loading="lazy" />
+                <div class="story-meta"><span class="pill green">照片</span></div>
+                <h3>去海边走了走，风比想象中大</h3>
+              </article>
+              <article class="text-story story" id="story-photos" data-search-title="手机里那几百张照片，终于开始整理了">
+                <div class="story-meta"><span class="play-dot green-dot" aria-hidden="true">▶</span><span class="pill green">整理中</span></div>
+                <h3>手机里那几百张照片，终于开始整理了</h3>
+                <p>先挑了一小部分放上来。接下来按地点和日期慢慢归档，想找一张照片会方便很多。</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="middle-column">
+            <article class="medium-story story" id="story-train" data-search-title="下一趟旅行，先定个方向">
+              <img src="./assets/train-window.png" alt="列车窗外风景的编辑插画" loading="lazy" />
+              <div class="story-meta"><span class="pill orange">旅行计划</span></div>
+              <h3>下一趟旅行，先定个方向</h3>
+            </article>
+            <article class="medium-story story" id="story-city" data-search-title="收藏夹里那几个想去的城市">
+              <img src="./assets/red-city.png" alt="两个人在城市街道上的红黑插画" loading="lazy" />
+              <div class="story-meta"><span class="play-dot amber-dot" aria-hidden="true">▶</span><span class="pill orange">想去的地方</span></div>
+              <h3>收藏夹里那几个想去的城市</h3>
+            </article>
+          </div>
+
+          <div class="side-column">
+            <article class="side-story story" id="story-food" data-search-title="上周吃的那家店，值得再去一次">
+              <div class="side-art side-art-orange" aria-hidden="true"><span>GOOD<br />FOOD</span></div>
+              <div class="story-meta"><span class="pill red">吃饭</span></div>
+              <h3>上周吃的那家店，值得再去一次</h3>
+            </article>
+            <article class="side-story story" id="story-list" data-search-title="我们把旅行清单写到了第 18 条">
+              <div class="side-art side-art-blue" aria-hidden="true"><span>18<span class="small-plus">+</span></span></div>
+              <div class="story-meta"><span class="pill red">清单</span></div>
+              <h3>我们把旅行清单写到了第 18 条</h3>
+            </article>
+            <article class="side-story story" id="story-song" data-search-title="最近车上一直循环的几首歌">
+              <div class="side-art side-art-lilac" aria-hidden="true"><span>♪ ♪</span></div>
+              <div class="story-meta"><span class="pill red">歌单</span></div>
+              <h3>最近车上一直循环的几首歌</h3>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="popular page-width" id="popular" aria-labelledby="popular-title">
+        <div class="section-heading"><h2 id="popular-title">POPULAR</h2><span>QUICK INDEX / 01—08</span></div>
+        <div class="popular-grid">
+          <article class="popular-item"><img src="./assets/shoreline-memory.png" alt="海边" loading="lazy" /><div><span class="pill red">照片</span><h3>今年最喜欢的几张合照</h3></div></article>
+          <article class="popular-item"><img src="./assets/train-window.png" alt="列车窗外" loading="lazy" /><div><span class="pill orange">旅行</span><h3>火车上拍的窗外风景</h3></div></article>
+          <article class="popular-item"><img src="./assets/editorial-weekend.png" alt="桌边的相机" loading="lazy" /><div><span class="pill blue">周末</span><h3>周末最常去的三个地方</h3></div></article>
+          <article class="popular-item"><span class="popular-type type-yellow" aria-hidden="true">01</span><div><span class="pill red">日常</span><h3>第一张放进来的照片</h3></div></article>
+          <article class="popular-item"><img src="./assets/red-city.png" alt="城市街道插画" loading="lazy" /><div><span class="pill green">地点</span><h3>一起走过的几条街</h3></div></article>
+          <article class="popular-item"><span class="popular-type type-black" aria-hidden="true">♪</span><div><span class="pill blue">歌单</span><h3>反复听也不会腻的歌</h3></div></article>
+          <article class="popular-item"><img src="./assets/editorial-weekend.png" alt="两个人讨论地图" loading="lazy" /><div><span class="pill orange">清单</span><h3>还没来得及实现的计划</h3></div></article>
+          <article class="popular-item"><span class="popular-type type-red" aria-hidden="true">+</span><div><span class="pill red">随手记</span><h3>一句话就能想起的事</h3></div></article>
+        </div>
+        <a class="black-strip" href="#weekend">继续往下看 <span aria-hidden="true">↓</span></a>
+      </section>
+
+      <section class="feature-section page-width" id="weekend" aria-labelledby="weekend-title">
+        <div class="section-heading"><h2 id="weekend-title">WEEKEND FILES</h2><span>VIEW THE EDITION</span></div>
+        <div class="feature-rail">
+          <article class="rail-card rail-side"><img src="./assets/shoreline-memory.png" alt="海边散步" loading="lazy" /><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">周末记录</span></div><h3>天气不错，就出门走了走</h3></article>
+          <article class="rail-card rail-feature"><div class="rail-feature-copy"><span class="issue-label">FEATURED / 001</span><h3>没有安排的周末，最后去了海边</h3><p>路上买了喝的，到了以后待到天快黑。照片先放在这一期。</p><span class="pill white">周末记录</span></div><img src="./assets/red-city.png" alt="城市里的两个人" loading="lazy" /></article>
+          <article class="rail-card rail-side"><img src="./assets/train-window.png" alt="旅途窗景" loading="lazy" /><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">旅途</span></div><h3>车窗外的风景，比计划好看</h3></article>
+        </div>
+      </section>
+
+      <section class="feature-section page-width" id="places" aria-labelledby="places-title">
+        <div class="section-heading"><h2 id="places-title">PLACES &amp; DAYS</h2><span>VIEW ALL</span></div>
+        <div class="place-feature">
+          <img src="./assets/train-window.png" alt="列车窗外的海与山" loading="lazy" />
+          <article class="place-copy"><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">旅行</span></div><h3>去过的地方，先从这一站开始整理</h3><p>照片、车票、吃过的店，以及当时随手写下的备注。每个地点都留一个位置，后面再补上真实的故事。</p><div class="place-byline"><span>OURS / PLACE FILE 01</span><span>TO BE CONTINUED</span></div></article>
+        </div>
+        <div class="two-stories">
+          <article class="split-story"><div><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">地点</span></div><h3>那些说过“下次还来”的小店</h3></div><div class="split-art split-art-blue" aria-hidden="true">AGAIN!</div></article>
+          <article class="split-story"><div><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">清单</span></div><h3>下一次出发前，要记得带的东西</h3></div><div class="split-art split-art-red" aria-hidden="true">✓ ✓ ✓</div></article>
+        </div>
+      </section>
+
+      <section class="feature-section page-width" id="details" aria-labelledby="details-title">
+        <div class="section-heading"><h2 id="details-title">THE LITTLE THINGS</h2><span>VIEW ALL</span></div>
+        <div class="detail-grid">
+          <article class="detail-story"><div class="detail-image"><img src="./assets/editorial-weekend.png" alt="桌上的地图、照片和相机" loading="lazy" /></div><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">随手记</span></div><h3>照片之外，还有票根和几张小纸条</h3></article>
+          <article class="detail-story"><div class="detail-image"><img src="./assets/shoreline-memory.png" alt="海边傍晚" loading="lazy" /></div><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">照片</span></div><h3>手机相册里，总有几张舍不得删</h3></article>
+        </div>
+      </section>
+
+      <section class="closing page-width" aria-labelledby="closing-title"><span>ISSUE 001 / OURS.</span><h2 id="closing-title">下一期，继续更新。</h2><a href="#latest">回到最新</a></section>
+    </main>
+
+    <footer class="site-footer"><div class="footer-inner page-width"><div class="footer-top"><a class="wordmark" href="#top">OURS<span>.</span></a><nav aria-label="页脚导航"><a href="#latest">最新</a><a href="#popular">热门</a><a href="#weekend">周末</a><a href="#places">地点</a></nav><span>ISSUE 001</span></div><div class="footer-middle"><p>两个人的照片、地点和小事。<br />想到什么，就继续往里加。</p><strong>OURS.</strong></div><div class="footer-bottom"><span>TWO PEOPLE / ONE ARCHIVE</span><a href="#top">返回顶部 ↑</a></div></div></footer>
+
+    <dialog class="search-dialog" data-search-dialog aria-labelledby="search-title"><div class="search-head"><h2 id="search-title">站内搜索</h2><button type="button" aria-label="关闭搜索" data-search-close>×</button></div><label for="site-search">找一条记录</label><input id="site-search" type="search" placeholder="试试：照片、旅行、海边" autocomplete="off" /><div class="search-results" data-search-results aria-live="polite"></div></dialog>
+  </body>
+</html>
