@@ -5,7 +5,7 @@ const stories = [
     title: "那张最早的合照",
     story: "还记得我们第一次一起拍照的地方吗？照片里的我们有点拘谨，身后是熟悉的校园。后来再看，才发现一切都从那天慢慢开始。",
     clue: "从那一天起，普通的地方也开始有了特别的意义。",
-    image: "./assets/editorial-weekend.png",
+    image: "./assets/editorial-weekend.jpg",
     alt: "地图和相机的示意插画"
   },
   {
@@ -13,7 +13,7 @@ const stories = [
     title: "一起走过的街角",
     story: "没有特别的计划，只是边走边聊。后来我们经过那条街，总会不约而同地想起那天的事。",
     clue: "有你一起走，寻常的路也会成为目的地。",
-    image: "./assets/red-city.png",
+    image: "./assets/red-city.jpg",
     alt: "两个人走过城市的插画"
   },
   {
@@ -21,7 +21,7 @@ const stories = [
     title: "舍不得结束的傍晚",
     story: "风吹得头发乱糟糟的，天快黑了，我们还是在海边多待了一会儿。你说过，下次还想再来。",
     clue: "下一站，我们再一起出发。",
-    image: "./assets/shoreline-memory.png",
+    image: "./assets/shoreline-memory.jpg",
     alt: "两个人在海边散步的示意照片"
   }
 ];
