@@ -3,71 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#17191b" />
-  <meta name="description" content="沿着我们走过的地方，找到藏起来的礼物。" />
-  <title>下一站，和你 · 一份未拆封的礼物</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317191b'/%3E%3Cpath d='M7 23c5-13 10 1 18-14' fill='none' stroke='%23efb66e' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='10' r='3' fill='%23efb66e'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#08111c" />
+  <meta name="description" content="在照片里寻找线索，点亮共同走过的地方。" />
+  <title>下一站，和你 · 回忆寻宝</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2308111c'/%3E%3Cpath d='M16 4v24M4 16h24M7.5 7.5l17 17m0-17-17 17' stroke='%23ffc776' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23ffc776'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="./styles.css" />
   <script defer src="./script.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#journey">跳到回忆地图</a>
-  <header class="site-header">
-    <a class="brand" href="#top" aria-label="回到开头"><span class="brand-mark">✳</span><span>下一站，和你</span></a>
-    <nav aria-label="页面导航"><a href="#journey">回忆地图</a><a href="#gift">最后一站</a></nav>
-    <div class="header-progress"><span class="progress-spark" aria-hidden="true">✳</span><span id="header-count">0 / 3</span> 地点已点亮</div>
-  </header>
-  <main id="top">
-    <section class="hero page-width" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="eyebrow">A LITTLE JOURNEY · FOR YOU</p>
-        <p class="hero-index">01 <span></span> 一份还不能立刻拆开的礼物</p>
-        <h1 id="hero-title">我们走过的地方，<em>藏着下一站。</em></h1>
-        <p class="hero-description">从大学里那张最早的照片开始，沿着记忆往前走。找到三条线索，最后一站才会出现。</p>
-        <a class="primary-button" href="#journey">从第一张照片出发 <span aria-hidden="true">↗</span></a>
-        <div class="hero-progress" aria-live="polite"><span class="hero-progress-line"><span id="hero-progress-fill"></span></span><strong id="hero-progress-label">还有 3 处回忆等你点亮</strong></div>
-      </div>
-      <div class="hero-art">
-        <div class="hero-photo"><img src="./assets/editorial-weekend.jpg" alt="桌上的地图与相机，作为大学第一张照片的示意图" /></div>
-        <div class="photo-caption"><span>ARCHIVE NO. 001</span><span>故事从这里开始</span></div>
-        <div class="hero-seal" aria-hidden="true">TO<br />YOU<span>✳</span></div>
-      </div>
-    </section>
-    <section class="journey" id="journey" aria-labelledby="journey-title">
-      <div class="page-width">
-        <div class="section-intro"><p class="eyebrow">THE PLACES WE KEEP</p><h2 id="journey-title">把一起去过的地方，<br /><em>一处一处点亮。</em></h2><p>每张卡片里藏着一段回忆。打开它，收下线索，地图就会亮起一站。</p></div>
-        <div class="route" aria-label="三处回忆地点">
-          <article class="place-card" data-place="0">
-            <div class="place-top"><span class="place-number">01 / 起点</span><span class="place-status" data-status>尚未点亮</span></div>
-            <div class="place-image"><img src="./assets/editorial-weekend.jpg" alt="地图、相机与照片的插画" loading="lazy" /><span class="place-pin" aria-hidden="true">01</span></div>
-            <div class="place-body"><p class="place-kicker">CAMPUS · FIRST FRAME</p><h3>第一次合照的地方</h3><p>那时候的我们，还不知道以后会一起走过多少地方。</p><button class="place-button" type="button" data-open="0">翻开这条线索 <span aria-hidden="true">↗</span></button></div>
-          </article>
-          <article class="place-card" data-place="1">
-            <div class="place-top"><span class="place-number">02 / 城市</span><span class="place-status" data-status>尚未点亮</span></div>
-            <div class="place-image"><img src="./assets/red-city.jpg" alt="两个人走过城市街道的插画" loading="lazy" /><span class="place-pin" aria-hidden="true">02</span></div>
-            <div class="place-body"><p class="place-kicker">CITY · ORDINARY DAYS</p><h3>那些走过的街角</h3><p>有些平常的傍晚，因为一起走过，后来就不平常了。</p><button class="place-button" type="button" data-open="1">翻开这条线索 <span aria-hidden="true">↗</span></button></div>
-          </article>
-          <article class="place-card" data-place="2">
-            <div class="place-top"><span class="place-number">03 / 远方</span><span class="place-status" data-status>尚未点亮</span></div>
-            <div class="place-image"><img src="./assets/shoreline-memory.jpg" alt="两个人在海边散步的示意照片" loading="lazy" /><span class="place-pin" aria-hidden="true">03</span></div>
-            <div class="place-body"><p class="place-kicker">SEA · ONE MORE TIME</p><h3>说过“下次还来”的地方</h3><p>风很大，天色慢慢暗下来，但我们都还不想走。</p><button class="place-button" type="button" data-open="2">翻开这条线索 <span aria-hidden="true">↗</span></button></div>
-          </article>
+  <div class="game-app">
+    <header class="game-header">
+      <div class="game-brand"><span class="brand-symbol" aria-hidden="true">✳</span><span>下一站，和你</span><small>回忆寻宝</small></div>
+      <div class="header-right"><span class="header-progress" id="header-progress">线索 0 / 3</span><button class="reset-button" id="reset-button" type="button">↻ 重新开始</button></div>
+    </header>
+
+    <nav class="journey-track" aria-label="回忆地点进度">
+      <div class="track-stop" data-stop="0"><span class="track-dot">01</span><span>那张照片</span></div>
+      <div class="track-stop" data-stop="1"><span class="track-dot">02</span><span>走过的街</span></div>
+      <div class="track-stop" data-stop="2"><span class="track-dot">03</span><span>海边</span></div>
+      <div class="track-stop gift-stop" data-stop="3"><span class="track-dot">✳</span><span>礼物</span></div>
+    </nav>
+
+    <main class="game-main" id="main">
+      <section class="game-screen" id="game-screen" aria-labelledby="stage-title">
+        <aside class="stage-info">
+          <p class="stage-count" id="stage-count">STAGE 01 / 03</p>
+          <h1 id="stage-title">第一张照片，<br /><em>还记得吗？</em></h1>
+          <p class="stage-story" id="stage-story">大学时的那天晚上，小店门口留下了我们的第一张照片。仔细看，画面里藏着三个线索。</p>
+          <div class="mission">
+            <div class="mission-label"><span>当前任务</span><span id="mission-count">0 / 3</span></div>
+            <p id="mission-instruction">在照片里找到：月亮、那杯饮料，还有门口的灯。</p>
+            <div class="mission-items" id="mission-items"></div>
+          </div>
+          <p class="feedback" id="feedback" aria-live="polite">轻触照片里的目标，开始寻找。</p>
+          <button class="hint-button" id="hint-button" type="button" aria-expanded="false">找不到？给我一点提示 ↗</button>
+          <p class="hint-text" id="hint-text" hidden></p>
+        </aside>
+        <div class="play-area">
+          <div class="scene" id="scene" aria-label="小游戏画面"></div>
+          <div class="scene-bottom"><span id="scene-label">ARCHIVE / FIRST FRAME</span><span id="scene-control">点击照片，寻找线索</span></div>
+          <div class="stage-clear" id="stage-clear" hidden>
+            <span class="clear-symbol" aria-hidden="true">✳</span>
+            <p class="clear-label">地点已点亮</p>
+            <h2 id="clear-title">第一条线索找到了</h2>
+            <p id="clear-clue"></p>
+            <button class="next-button" id="next-button" type="button">去下一站 <span aria-hidden="true">→</span></button>
+          </div>
         </div>
-        <div class="route-caption"><span>起点 · 那张最早的照片</span><span>终点 · 一件还没告诉你的事</span></div>
-      </div>
-    </section>
-    <section class="gift-section page-width" id="gift" aria-labelledby="gift-title">
-      <div class="gift-heading"><p class="eyebrow">THE LAST STOP</p><h2 id="gift-title">最后一站，<em>留给我们。</em></h2></div>
-      <div class="gift-card" id="gift-card">
-        <div class="gift-card-top"><span>PRIVATE LETTER / NO. 004</span><span class="gift-lock" id="gift-lock">◌ 未解锁</span></div>
-        <div class="gift-card-main"><span class="gift-icon" aria-hidden="true">✳</span><div><p id="gift-overline">还有三条线索，礼物就会出现</p><h3 id="gift-card-title">一封尚未拆开的信</h3></div></div>
-        <div class="gift-card-bottom"><p id="gift-card-hint">把地图上的三处回忆全部点亮，再回来拆开。</p><button id="gift-button" class="gift-button" type="button" disabled>等待解锁 <span aria-hidden="true">↗</span></button></div>
-      </div>
-      <p class="closing-note">TO BE CONTINUED, TOGETHER. <span>✳</span></p>
-    </section>
-  </main>
-  <dialog class="story-dialog" id="story-dialog" aria-labelledby="dialog-title"><button class="dialog-close" type="button" data-close aria-label="关闭">×</button><div class="dialog-image"><img id="dialog-image" src="" alt="" /></div><div class="dialog-content"><p class="eyebrow" id="dialog-kicker"></p><h2 id="dialog-title"></h2><p id="dialog-story"></p><div class="clue-box"><span>这一站的线索</span><strong id="dialog-clue"></strong></div><button class="primary-button dialog-action" type="button" id="collect-button">收下线索，点亮这里 <span aria-hidden="true">✳</span></button></div></dialog>
-  <dialog class="reveal-dialog" id="reveal-dialog" aria-labelledby="reveal-title"><button class="dialog-close" type="button" data-reveal-close aria-label="关闭">×</button><p class="eyebrow">THE GIFT · JUST FOR YOU</p><span class="reveal-symbol" aria-hidden="true">✳</span><p class="reveal-intro">三处回忆都找到了。现在，说说下一站。</p><h2 id="reveal-title">我想送你的，是<em>一段不用操心的时间。</em></h2><p id="reveal-description">挑一个我们都喜欢的周末。住进一间舒服的酒店，吃一顿不赶时间的晚餐，去一个你提过想去的地方。路线、预订和琐碎的事，都交给我。</p><div class="reveal-details"><span>目的地 <strong>等我们一起定</strong></span><span>日期 <strong>挑你最放松的周末</strong></span></div><button class="text-button" type="button" data-reveal-close>先把这一页收好 ↗</button></dialog>
-  <footer><span>MADE FOR ONE PERSON, WITH ALL MY HEART.</span><button type="button" id="reset-button">重新走一遍 ↺</button></footer>
+      </section>
+
+      <section class="final-screen" id="final-screen" aria-labelledby="final-title" hidden>
+        <div class="final-light" aria-hidden="true">✳</div>
+        <p class="stage-count">ALL CLUES FOUND / 03</p>
+        <h1 id="final-title">下一站，<em>一起出发。</em></h1>
+        <p class="final-lead">三处地方都亮了。现在可以拆开真正的礼物。</p>
+        <button class="next-button" id="open-gift" type="button">拆开礼物 <span aria-hidden="true">→</span></button>
+        <div class="gift-reveal" id="gift-reveal" hidden>
+          <p>TO YOU · 一份只需要你出现的安排</p>
+          <h2>一段不用操心的时间</h2>
+          <p>挑一个我们都喜欢的周末。住进一间舒服的酒店，吃一顿不赶时间的晚餐，去一个你提过想去的地方。路线、预订和琐碎的事，都交给我。</p>
+          <span>目的地：等我们一起定　·　日期：挑你最放松的周末</span>
+        </div>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
