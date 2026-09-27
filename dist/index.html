@@ -3,66 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#08111c" />
-  <meta name="description" content="在照片里寻找线索，点亮共同走过的地方。" />
-  <title>下一站，和你 · 回忆寻宝</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2308111c'/%3E%3Cpath d='M16 4v24M4 16h24M7.5 7.5l17 17m0-17-17 17' stroke='%23ffc776' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23ffc776'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#f4f4f2" />
+  <meta name="description" content="沿着三张照片，找到下一站。" />
+  <title>下一站 · 一场关于我们的寻找</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4f4f2'/%3E%3Cpath d='M7 24 25 8' stroke='%231c1d1e' stroke-width='2'/%3E%3Ccircle cx='7' cy='24' r='3' fill='%231c1d1e'/%3E%3Ccircle cx='25' cy='8' r='3' fill='%231c1d1e'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="./styles.css" />
   <script defer src="./script.js"></script>
 </head>
 <body>
   <div class="game-app">
     <header class="game-header">
-      <div class="game-brand"><span class="brand-symbol" aria-hidden="true">✳</span><span>下一站，和你</span><small>回忆寻宝</small></div>
-      <div class="header-right"><span class="header-progress" id="header-progress">线索 0 / 3</span><button class="reset-button" id="reset-button" type="button">↻ 重新开始</button></div>
+      <div class="game-brand"><strong>下一站</strong><span>一场关于我们的寻找</span></div>
+      <div class="header-right"><span class="header-progress" id="header-progress">0 / 3 已完成</span><button class="reset-button" id="reset-button" type="button">重新开始</button></div>
     </header>
 
-    <nav class="journey-track" aria-label="回忆地点进度">
-      <div class="track-stop" data-stop="0"><span class="track-dot">01</span><span>那张照片</span></div>
-      <div class="track-stop" data-stop="1"><span class="track-dot">02</span><span>走过的街</span></div>
+    <nav class="journey-track" aria-label="游戏进度">
+      <div class="track-stop" data-stop="0"><span class="track-dot">01</span><span>照片</span></div>
+      <div class="track-stop" data-stop="1"><span class="track-dot">02</span><span>街道</span></div>
       <div class="track-stop" data-stop="2"><span class="track-dot">03</span><span>海边</span></div>
-      <div class="track-stop gift-stop" data-stop="3"><span class="track-dot">✳</span><span>礼物</span></div>
+      <div class="track-stop gift-stop" data-stop="3"><span class="track-dot">04</span><span>礼物</span></div>
     </nav>
 
     <main class="game-main" id="main">
       <section class="game-screen" id="game-screen" aria-labelledby="stage-title">
         <aside class="stage-info">
-          <p class="stage-count" id="stage-count">STAGE 01 / 03</p>
-          <h1 id="stage-title">第一张照片，<br /><em>还记得吗？</em></h1>
-          <p class="stage-story" id="stage-story">大学时的那天晚上，小店门口留下了我们的第一张照片。仔细看，画面里藏着三个线索。</p>
+          <p class="stage-count" id="stage-count">01 / 03</p>
+          <h1 id="stage-title">第一张照片</h1>
+          <p class="stage-story" id="stage-story">大学时，小店门口的那一晚。</p>
           <div class="mission">
-            <div class="mission-label"><span>当前任务</span><span id="mission-count">0 / 3</span></div>
-            <p id="mission-instruction">在照片里找到：月亮、那杯饮料，还有门口的灯。</p>
+            <div class="mission-label"><span>目标</span><span id="mission-count">0 / 3</span></div>
+            <p id="mission-instruction">在照片里找到月亮、饮料和门口的灯。</p>
             <div class="mission-items" id="mission-items"></div>
           </div>
-          <p class="feedback" id="feedback" aria-live="polite">轻触照片里的目标，开始寻找。</p>
-          <button class="hint-button" id="hint-button" type="button" aria-expanded="false">找不到？给我一点提示 ↗</button>
+          <p class="feedback" id="feedback" aria-live="polite">轻触照片，开始寻找。</p>
+          <button class="hint-button" id="hint-button" type="button" aria-expanded="false">显示提示</button>
           <p class="hint-text" id="hint-text" hidden></p>
         </aside>
         <div class="play-area">
-          <div class="scene" id="scene" aria-label="小游戏画面"></div>
-          <div class="scene-bottom"><span id="scene-label">ARCHIVE / FIRST FRAME</span><span id="scene-control">点击照片，寻找线索</span></div>
+          <div class="scene" id="scene" aria-label="互动照片"></div>
+          <div class="scene-bottom"><span id="scene-label">第一张照片</span><span id="scene-control">寻找画面中的物件</span></div>
           <div class="stage-clear" id="stage-clear" hidden>
-            <span class="clear-symbol" aria-hidden="true">✳</span>
-            <p class="clear-label">地点已点亮</p>
-            <h2 id="clear-title">第一条线索找到了</h2>
+            <p class="clear-label">地点已找到</p>
+            <h2 id="clear-title">第一站完成</h2>
             <p id="clear-clue"></p>
-            <button class="next-button" id="next-button" type="button">去下一站 <span aria-hidden="true">→</span></button>
+            <button class="next-button" id="next-button" type="button">继续 <span aria-hidden="true">→</span></button>
           </div>
         </div>
       </section>
 
       <section class="final-screen" id="final-screen" aria-labelledby="final-title" hidden>
-        <div class="final-light" aria-hidden="true">✳</div>
-        <p class="stage-count">ALL CLUES FOUND / 03</p>
-        <h1 id="final-title">下一站，<em>一起出发。</em></h1>
-        <p class="final-lead">三处地方都亮了。现在可以拆开真正的礼物。</p>
-        <button class="next-button" id="open-gift" type="button">拆开礼物 <span aria-hidden="true">→</span></button>
+        <p class="stage-count">03 / 03</p>
+        <h1 id="final-title">三处回忆，<br />都找到了。</h1>
+        <p class="final-lead">现在，打开留给你的下一站。</p>
+        <button class="next-button" id="open-gift" type="button">打开礼物 <span aria-hidden="true">→</span></button>
         <div class="gift-reveal" id="gift-reveal" hidden>
-          <p>TO YOU · 一份只需要你出现的安排</p>
-          <h2>一段不用操心的时间</h2>
-          <p>挑一个我们都喜欢的周末。住进一间舒服的酒店，吃一顿不赶时间的晚餐，去一个你提过想去的地方。路线、预订和琐碎的事，都交给我。</p>
-          <span>目的地：等我们一起定　·　日期：挑你最放松的周末</span>
+          <p>下一站</p>
+          <h2>找一个周末，出发吧。</h2>
+          <p>你挑时间。路程、酒店和晚餐由我安排。去一个你说过想去的地方，慢慢待两天。</p>
+          <span>目的地和日期，我们一起定。</span>
         </div>
       </section>
     </main>

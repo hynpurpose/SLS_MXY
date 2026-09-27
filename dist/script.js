@@ -1,15 +1,15 @@
 // Demo content. Replace the scene text, target positions and pictures with your own memories.
 const scenes = [
   {
-    count: "STAGE 01 / 03",
-    title: "第一张照片，<br /><em>还记得吗？</em>",
-    story: "大学时的那天晚上，小店门口留下了我们的第一张照片。仔细看，画面里藏着三个线索。",
-    instruction: "在照片里找到：月亮、那杯饮料，还有门口的灯。",
-    hint: "仔细看左上方的窗、女孩的手边和右上角。",
-    label: "ARCHIVE / FIRST FRAME",
-    control: "点击照片，寻找线索",
-    clearTitle: "第一处回忆，点亮了。",
-    clue: "故事从那天晚上的小店开始。下一条线索，藏在我们走过的街上。",
+    count: "01 / 03",
+    title: "第一张照片",
+    story: "大学时，小店门口的那一晚。",
+    instruction: "找出月亮、饮料和门口的灯。",
+    hint: "月亮在窗边；饮料在她手中；灯在右上角。",
+    label: "那天晚上",
+    control: "点击照片寻找",
+    clearTitle: "第一站，已找到。",
+    clue: "从那张照片开始。下一站，回到走过的街。",
     image: "./assets/hero-first-photo.jpg",
     targets: [
       { name: "月亮", x: 26, y: 24 },
@@ -18,15 +18,15 @@ const scenes = [
     ]
   },
   {
-    count: "STAGE 02 / 03",
-    title: "那条路，<br /><em>再走一遍。</em>",
-    story: "走过许多街以后，有一段路总会留在记忆里。按那天的顺序，把路重新连起来。",
-    instruction: "依次点亮：路灯 → 我们 → 桥。顺序错了，要从头再走。",
+    count: "02 / 03",
+    title: "重走那条街",
+    story: "从路灯走到桥边，身旁是彼此。",
+    instruction: "按顺序选择：路灯 → 我们 → 桥。",
     hint: "路灯在左上角；我们在画面中央；桥在右边远处。",
-    label: "ARCHIVE / CITY WALK",
-    control: "按照顺序点亮路径",
-    clearTitle: "第二处回忆，点亮了。",
-    clue: "那段一起走过的路，终于连成了下一条线。终点在海边。",
+    label: "走过的街",
+    control: "按顺序选择画面中的三处",
+    clearTitle: "第二站，已找到。",
+    clue: "下一站，在海边。",
     image: "./assets/red-city.jpg",
     targets: [
       { name: "路灯", x: 30, y: 9 },
@@ -35,15 +35,15 @@ const scenes = [
     ]
   },
   {
-    count: "STAGE 03 / 03",
-    title: "把海边的那天，<br /><em>拼回来。</em>",
-    story: "那天风很大，海平线却很平静。照片被打乱了，把它还原成我们记得的样子。",
-    instruction: "先选一块，再选另一块交换。让海平线和两个人重新连起来。",
-    hint: "先看海平线，再看两个人的位置。点击任意两块就能交换。",
-    label: "ARCHIVE / BY THE SEA",
-    control: "点两块照片，交换位置",
-    clearTitle: "最后一处回忆，也亮了。",
-    clue: "说过“下次还来”的地方已经找到。现在，看看我为下一站准备了什么。",
+    count: "03 / 03",
+    title: "还原海边照片",
+    story: "把被打乱的画面拼回去。",
+    instruction: "选两块照片交换，拼回原来的画面。",
+    hint: "先看海平线，再看两个人的位置。",
+    label: "海边",
+    control: "点击两块照片交换",
+    clearTitle: "第三站，已找到。",
+    clue: "三处回忆都齐了。接下来是新的目的地。",
     image: "./assets/shoreline-memory.jpg"
   }
 ];
@@ -63,7 +63,7 @@ let hintsVisible = false;
 const $ = (selector) => document.querySelector(selector);
 
 function updateTrack() {
-  $("#header-progress").textContent = `线索 ${completed} / 3`;
+  $("#header-progress").textContent = `已完成 ${completed} / 3`;
   document.querySelectorAll(".track-stop").forEach((stop, index) => {
     stop.classList.toggle("done", index < completed);
     stop.classList.toggle("active", index === completed);
@@ -96,6 +96,7 @@ function setStage(index) {
   $("#hint-text").textContent = data.hint;
   $("#hint-text").hidden = true;
   $("#hint-button").setAttribute("aria-expanded", "false");
+  $("#hint-button").textContent = "显示提示";
   $("#scene-label").textContent = data.label;
   $("#scene-control").textContent = data.control;
   if (index === 0) renderSearchScene();
@@ -129,7 +130,8 @@ function clearStage(index) {
   updateTrack();
   $("#clear-title").textContent = scenes[index].clearTitle;
   $("#clear-clue").textContent = scenes[index].clue;
-  $("#next-button").innerHTML = index === 2 ? '解锁礼物 <span aria-hidden="true">→</span>' : '去下一站 <span aria-hidden="true">→</span>';
+  $(".clear-label").textContent = `第 0${index + 1} 站完成`;
+  $("#next-button").innerHTML = index === 2 ? '查看礼物 <span aria-hidden="true">→</span>' : '继续 <span aria-hidden="true">→</span>';
   $("#stage-clear").hidden = false;
   $("#next-button").focus();
 }
@@ -143,13 +145,13 @@ function renderSearchScene() {
     button.classList.add("found");
     button.setAttribute("aria-label", `已找到${target.name}`);
     renderMission(data.targets.map((item) => item.name), found);
-    feedback(`找到了「${target.name}」！`);
+    feedback(`已找到：${target.name}`);
     if (found.size === data.targets.length) clearStage(0);
   }, "寻找"));
-  board.addEventListener("click", () => feedback("这里没有线索，再仔细看看照片里的物品。", true));
+  board.addEventListener("click", () => feedback("试试照片里的其他位置。", true));
   $("#scene").replaceChildren(board);
   renderMission(data.targets.map((item) => item.name), found);
-  feedback("轻触照片里的目标，开始寻找。");
+  feedback("点击画面中的物件。");
 }
 function renderRouteScene() {
   routeStep = 0;
@@ -170,21 +172,21 @@ function renderRouteScene() {
       buttons.forEach((item) => item.classList.remove("found"));
       path.setAttribute("points", "");
       renderMission(data.targets.map((item) => item.name), new Set());
-      feedback("顺序不对，从路灯重新出发。", true);
+      feedback("顺序有误，请从路灯开始。", true);
       return;
     }
     button.classList.add("found");
     routeStep += 1;
     path.setAttribute("points", data.targets.slice(0, routeStep).map((item) => `${item.x},${item.y}`).join(" "));
     renderMission(data.targets.map((item) => item.name), new Set(Array.from({ length: routeStep }, (_, i) => i)));
-    feedback(`第 ${routeStep} 站：${target.name}。`);
+    feedback(`已到：${target.name}`);
     if (routeStep === data.targets.length) clearStage(1);
   }, "点亮"));
   buttons.push(...board.querySelectorAll(".hotspot"));
-  board.addEventListener("click", () => feedback("点照片上的光点，按路灯、我们、桥的顺序前进。", true));
+  board.addEventListener("click", () => feedback("按路灯、我们、桥的顺序选择。", true));
   $("#scene").replaceChildren(board);
   renderMission(data.targets.map((item) => item.name), new Set());
-  feedback("从路灯开始，沿着照片走一遍。");
+  feedback("从路灯开始。");
 }
 function renderPuzzlePieces() {
   const board = $(".puzzle-board");
@@ -199,13 +201,13 @@ function renderPuzzlePieces() {
       if (selectedPiece === null) {
         selectedPiece = position;
         renderPuzzlePieces();
-        feedback("再选一块照片，两块就会交换。");
+        feedback("再选一块交换。");
         return;
       }
       if (selectedPiece === position) {
         selectedPiece = null;
         renderPuzzlePieces();
-        feedback("已取消选择。再选两块照片交换。");
+        feedback("已取消选择。");
         return;
       }
       [puzzleOrder[selectedPiece], puzzleOrder[position]] = [puzzleOrder[position], puzzleOrder[selectedPiece]];
@@ -214,9 +216,9 @@ function renderPuzzlePieces() {
       const correct = new Set(puzzleOrder.flatMap((piece, index) => piece === index ? [index] : []));
       renderMission(["左边", "中间", "右边"], correct);
       if (correct.size === 3) {
-        feedback("照片拼好了！");
+        feedback("照片已还原。");
         clearStage(2);
-      } else feedback(`已经拼对 ${correct.size} 块，继续试试。`);
+      } else feedback(`已还原 ${correct.size} 块。`);
     });
     return button;
   }));
@@ -231,7 +233,7 @@ function renderPuzzleScene() {
   $("#scene").replaceChildren(board);
   renderPuzzlePieces();
   renderMission(["左边", "中间", "右边"], new Set());
-  feedback("选两块照片交换，让海平线连起来。");
+  feedback("点击两块照片交换。");
 }
 function renderFinal() {
   $("#game-screen").hidden = true;
@@ -245,6 +247,7 @@ $("#hint-button").addEventListener("click", () => {
   hintsVisible = !hintsVisible;
   $("#hint-text").hidden = !hintsVisible;
   $("#hint-button").setAttribute("aria-expanded", String(hintsVisible));
+  $("#hint-button").textContent = hintsVisible ? "收起提示" : "显示提示";
   $(".photo-board")?.classList.toggle("show-hints", hintsVisible);
 });
 $("#reset-button").addEventListener("click", () => {
