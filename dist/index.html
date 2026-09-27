@@ -1,148 +1,141 @@
 <!doctype html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f5f5f2" />
-    <meta name="description" content="OURS. 两个人的生活档案。照片、去过的地方和最近发生的小事，都在这里。" />
-    <title>OURS. — 两个人的生活档案</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f5f5f2'/%3E%3Ctext x='3' y='24' font-family='Arial' font-size='24' font-weight='900' fill='%23111111'%3EO%3C/text%3E%3Ccircle cx='26' cy='24' r='4' fill='%23f63c35'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="./styles.css" />
-    <script defer src="./script.js"></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">跳到内容</a>
-
-    <header class="site-header" id="top">
-      <a class="wordmark" href="#top" aria-label="OURS 首页">OURS<span>.</span></a>
-      <nav class="header-nav" aria-label="主导航">
-        <a href="#latest">最新</a>
-        <a href="#popular">热门</a>
-        <a href="#weekend">周末</a>
-        <a href="#places">地点</a>
-      </nav>
-      <div class="header-tools">
-        <button class="icon-button search-trigger" type="button" aria-label="搜索本站" data-search-open>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 5 5"/></svg>
-        </button>
-        <button class="icon-button menu-trigger" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu" data-menu-trigger>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        </button>
-      </div>
-      <nav class="mobile-menu" id="mobile-menu" aria-label="手机导航">
-        <a href="#latest">最新</a><a href="#popular">热门</a><a href="#weekend">周末</a><a href="#places">地点</a><a href="#details">更多记录</a>
-      </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="OURS. 两个人的生活档案。收藏照片、旅行，还有回想起来会笑的小事。" />
+  <title>OURS. — 两个人的生活档案</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23f3d66b'/%3E%3Ccircle cx='16' cy='20' r='9' stroke='%23181818' fill='none' stroke-width='3'/%3E%3Ccircle cx='25' cy='20' r='9' stroke='%23181818' fill='none' stroke-width='3'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script defer src="./script.js"></script>
+</head>
+<body>
+  <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 5l7 7-7 7"/></symbol>
+    <symbol id="arrow-up" viewBox="0 0 24 24"><path d="M5 19 19 5M5 5h14v14"/></symbol>
+    <symbol id="search" viewBox="0 0 24 24"><circle cx="10.7" cy="10.7" r="6.7"/><path d="m16 16 4.6 4.6"/></symbol>
+    <symbol id="shuffle" viewBox="0 0 24 24"><path d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 4-3 5-5m3-5c1-1 2-2 4-2h3m-4-4 4 4-4 4"/></symbol>
+    <symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="asterisk" viewBox="0 0 60 60"><path d="M30 5v50M8.4 17.5l43.2 25M8.4 42.5l43.2-25"/></symbol>
+  </defs></svg>
+  <a class="skip-link" href="#main">跳到内容</a>
+  <div class="page-shell" id="top">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="OURS 首页"><svg viewBox="0 0 42 28" aria-hidden="true"><circle cx="15" cy="14" r="10"/><circle cx="27" cy="14" r="10"/></svg><span>ours.</span></a>
+      <nav class="main-nav" aria-label="主导航"><a class="nav-link is-active" href="#top"><span class="nav-mark">✦</span> 首页</a><a class="nav-link" href="#collections">我们的收藏</a><a class="nav-link" href="#recent">最近记录</a></nav>
+      <button class="search-trigger" type="button" data-search-open aria-label="搜索记录"><svg aria-hidden="true" class="icon"><use href="#search"/></svg><span>找一找</span></button>
     </header>
 
     <main id="main">
-      <section class="latest page-width" id="latest" aria-labelledby="latest-title">
-        <div class="masthead-meta"><span>THE TWO-PERSON ARCHIVE</span><span>ISSUE 001 / OURS.</span></div>
-        <h1 id="latest-title">LATEST STORIES</h1>
-        <div class="section-rule"></div>
+      <section class="hero content-width" aria-labelledby="hero-title">
+        <div class="hero-name">
+          <p class="eyebrow">A LITTLE COLLECTION OF US</p>
+          <div class="title-wrap"><h1 id="hero-title">OURS.</h1><span class="name-note">你 + 我<svg viewBox="0 0 54 26" aria-hidden="true"><path d="M48 3C38 20 23 22 7 15m0 0 8-2M7 15l5 7"/></svg></span></div>
+          <p class="hero-caption"><span class="tiny-star" aria-hidden="true">✳</span> 两个人的生活档案 <span class="caption-line"></span> VOL. 01</p>
+        </div>
+        <div class="hero-intro">
+          <h2>两个人的生活，<br />一点一点收藏<span class="intro-dot">。</span></h2>
+          <p>照片、旅行，还有那些回想起来会笑的小事。</p>
+          <div class="hero-actions"><a class="button-dark" href="#collections">翻开我们的收藏<svg aria-hidden="true" class="icon"><use href="#arrow"/></svg></a><button class="random-button" type="button" data-random><svg aria-hidden="true" class="icon"><use href="#shuffle"/></svg>随便翻翻</button></div>
+        </div>
+      </section>
 
-        <div class="news-grid">
-          <div class="lead-column">
-            <article class="lead-story story" id="story-first" data-search-title="第 01 期：先把最近的事放上来">
-              <img class="lead-image" src="./assets/editorial-weekend.png" alt="两个人在桌边看地图、拍照的编辑插画" fetchpriority="high" />
-              <div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">首页记录</span></div>
-              <h2>第 01 期：先把最近的事放上来</h2>
-            </article>
-            <div class="lead-bottom">
-              <article class="small-story story" id="story-sea" data-search-title="去海边走了走，风比想象中大">
-                <img src="./assets/shoreline-memory.png" alt="两个人在海边散步的示意照片" loading="lazy" />
-                <div class="story-meta"><span class="pill green">照片</span></div>
-                <h3>去海边走了走，风比想象中大</h3>
-              </article>
-              <article class="text-story story" id="story-photos" data-search-title="手机里那几百张照片，终于开始整理了">
-                <div class="story-meta"><span class="play-dot green-dot" aria-hidden="true">▶</span><span class="pill green">整理中</span></div>
-                <h3>手机里那几百张照片，终于开始整理了</h3>
-                <p>先挑了一小部分放上来。接下来按地点和日期慢慢归档，想找一张照片会方便很多。</p>
-              </article>
+      <section class="collections content-width" id="collections" aria-labelledby="collection-title">
+        <div class="section-heading"><div><span class="section-number">01 /</span><h2 id="collection-title">我们的收藏</h2></div><p>一些小事，值得留着。<span class="heading-dash" aria-hidden="true"></span></p></div>
+        <div class="collection-grid">
+          <button class="collection-card" type="button" data-collection="photos" aria-label="打开照片收藏，3 条记录">
+            <div class="collection-art art-photos" aria-hidden="true">
+              <span class="art-index">FIG. 01</span>
+              <svg class="object-art camera-art" viewBox="0 0 320 250" fill="none">
+                <ellipse cx="164" cy="216" rx="84" ry="5" fill="#efefeb"/>
+                <g transform="rotate(-8 160 125)" stroke="#1c1d1a" stroke-width="2.4" stroke-linejoin="round">
+                  <path d="M87 79 97 60h38l11 19" fill="#f1d56d"/>
+                  <path d="M226 80v-9h24v15" fill="#fff"/>
+                  <rect x="61" y="80" width="200" height="123" rx="18" fill="#fff"/>
+                  <path d="M61 106h200v67H61z" fill="#f1d56d"/>
+                  <path d="M76 119v44" stroke-linecap="round"/>
+                  <circle cx="165" cy="141" r="45" fill="#fff"/>
+                  <circle cx="165" cy="141" r="33" fill="#1c1d1a"/>
+                  <circle cx="165" cy="141" r="20" stroke="#fff" stroke-width="1.4"/>
+                  <path d="M159 126c-6 1-10 5-10 11" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                  <rect x="222" y="89" width="23" height="9" rx="2" fill="#1c1d1a" stroke="none"/>
+                  <circle cx="83" cy="94" r="3" fill="#1c1d1a" stroke="none"/>
+                </g>
+                <g stroke="#1c1d1a" stroke-width="2" stroke-linecap="round"><path d="m249 42 7-11m6 22 15-5M235 36l-1-13"/><path d="M39 147c-11 4-12 18-2 23"/></g>
+                <path d="M43 172h-9l3-8" stroke="#1c1d1a" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <span class="art-note note-photo">keep this moment</span>
             </div>
-          </div>
-
-          <div class="middle-column">
-            <article class="medium-story story" id="story-train" data-search-title="下一趟旅行，先定个方向">
-              <img src="./assets/train-window.png" alt="列车窗外风景的编辑插画" loading="lazy" />
-              <div class="story-meta"><span class="pill orange">旅行计划</span></div>
-              <h3>下一趟旅行，先定个方向</h3>
-            </article>
-            <article class="medium-story story" id="story-city" data-search-title="收藏夹里那几个想去的城市">
-              <img src="./assets/red-city.png" alt="两个人在城市街道上的红黑插画" loading="lazy" />
-              <div class="story-meta"><span class="play-dot amber-dot" aria-hidden="true">▶</span><span class="pill orange">想去的地方</span></div>
-              <h3>收藏夹里那几个想去的城市</h3>
-            </article>
-          </div>
-
-          <div class="side-column">
-            <article class="side-story story" id="story-food" data-search-title="上周吃的那家店，值得再去一次">
-              <div class="side-art side-art-orange" aria-hidden="true"><span>GOOD<br />FOOD</span></div>
-              <div class="story-meta"><span class="pill red">吃饭</span></div>
-              <h3>上周吃的那家店，值得再去一次</h3>
-            </article>
-            <article class="side-story story" id="story-list" data-search-title="我们把旅行清单写到了第 18 条">
-              <div class="side-art side-art-blue" aria-hidden="true"><span>18<span class="small-plus">+</span></span></div>
-              <div class="story-meta"><span class="pill red">清单</span></div>
-              <h3>我们把旅行清单写到了第 18 条</h3>
-            </article>
-            <article class="side-story story" id="story-song" data-search-title="最近车上一直循环的几首歌">
-              <div class="side-art side-art-lilac" aria-hidden="true"><span>♪ ♪</span></div>
-              <div class="story-meta"><span class="pill red">歌单</span></div>
-              <h3>最近车上一直循环的几首歌</h3>
-            </article>
-          </div>
+            <div class="collection-label"><h3>照片</h3><span class="count">03</span><svg aria-hidden="true" class="icon card-arrow"><use href="#arrow-up"/></svg></div>
+            <p>拍得好不好不重要，<br />那天很开心就好。</p>
+          </button>
+          <button class="collection-card" type="button" data-collection="places" aria-label="打开旅行收藏，3 条记录">
+            <div class="collection-art art-places" aria-hidden="true">
+              <span class="art-index">FIG. 02</span>
+              <svg class="object-art map-art" viewBox="0 0 320 250" fill="none">
+                <ellipse cx="157" cy="220" rx="87" ry="5" fill="#efefeb"/>
+                <g stroke="#1c1d1a" stroke-width="2" stroke-linejoin="round">
+                  <path d="m59 101 60-19 62 21 64-20 13 116-65 21-64-22-61 19z" fill="#fff"/>
+                  <path d="m119 82 62 21 12 117-64-22z" fill="#b6d9c7"/>
+                  <path d="m84 109 1 72 27-8M140 118l10 57 27 10m24-62 27-9 8 70-24 8" stroke="#d2d6d0"/>
+                  <path d="M85 173c9-47 46-42 66-25s35 30 66-5" stroke-dasharray="4 6" stroke-linecap="round"/>
+                  <circle cx="86" cy="173" r="5" fill="#1c1d1a"/>
+                  <path d="M230 126c0 15-16 29-16 29s-16-14-16-29a16 16 0 0 1 32 0Z" fill="#f1d56d"/>
+                  <circle cx="214" cy="125" r="5" fill="#fff"/>
+                  <path d="m112 42 88-15-30 59-15-24-43-20Z" fill="#fff"/>
+                  <path d="m155 62 45-35-37 42-5 15-3-22Z" fill="#b6d9c7"/>
+                  <path d="m158 84 12 2-7-17"/>
+                  <path d="M119 59c-29 16-28 34-16 41" stroke-dasharray="3 6" stroke-linecap="round"/>
+                </g>
+              </svg>
+              <span class="art-note note-map">anywhere, with you.</span>
+            </div>
+            <div class="collection-label"><h3>旅行</h3><span class="count">03</span><svg aria-hidden="true" class="icon card-arrow"><use href="#arrow-up"/></svg></div>
+            <p>去过的地方，<br />还有下一次想一起去的。</p>
+          </button>
+          <button class="collection-card" type="button" data-collection="days" aria-label="打开日常收藏，2 条记录">
+            <div class="collection-art art-days" aria-hidden="true">
+              <span class="art-index">FIG. 03</span>
+              <svg class="object-art notes-art" viewBox="0 0 320 250" fill="none">
+                <ellipse cx="167" cy="222" rx="80" ry="5" fill="#efefeb"/>
+                <g transform="rotate(8 182 127)" stroke="#1c1d1a" stroke-width="2" stroke-linejoin="round">
+                  <path d="M124 43h122v154H124z" fill="#b6d9c7"/>
+                  <path d="M140 66h53M140 78h82M140 91h70" stroke="#fff" stroke-width="1.5"/>
+                </g>
+                <g transform="rotate(-7 148 149)" stroke="#1c1d1a" stroke-width="2" stroke-linejoin="round">
+                  <path d="M75 76h139v137H75z" fill="#fff"/>
+                  <path d="M88 89h113v86H88z" fill="#f7e9ad"/>
+                  <path d="M100 164h83M109 116v29c0 11 8 19 18 19h19c11 0 19-8 19-19v-29z" fill="#fff" stroke-linecap="round"/>
+                  <path d="M165 121h8c16 0 16 23 0 23h-8"/>
+                  <path d="M130 107c-8-6 5-11-1-17m14 17c-8-6 5-11-1-17" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M119 193h53" stroke-linecap="round"/>
+                </g>
+                <path d="m143 61 46-4 2 21-46 4z" fill="#eee7cc" opacity=".88"/>
+                <path d="M243 168v25m-12-12h24" stroke="#1c1d1a" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span class="art-note note-days">the little things</span>
+            </div>
+            <div class="collection-label"><h3>日常</h3><span class="count">02</span><svg aria-hidden="true" class="icon card-arrow"><use href="#arrow-up"/></svg></div>
+            <p>一顿饭，一首歌，<br />和一些没什么大不了的小事。</p>
+          </button>
         </div>
       </section>
 
-      <section class="popular page-width" id="popular" aria-labelledby="popular-title">
-        <div class="section-heading"><h2 id="popular-title">POPULAR</h2><span>QUICK INDEX / 01—08</span></div>
-        <div class="popular-grid">
-          <article class="popular-item"><img src="./assets/shoreline-memory.png" alt="海边" loading="lazy" /><div><span class="pill red">照片</span><h3>今年最喜欢的几张合照</h3></div></article>
-          <article class="popular-item"><img src="./assets/train-window.png" alt="列车窗外" loading="lazy" /><div><span class="pill orange">旅行</span><h3>火车上拍的窗外风景</h3></div></article>
-          <article class="popular-item"><img src="./assets/editorial-weekend.png" alt="桌边的相机" loading="lazy" /><div><span class="pill blue">周末</span><h3>周末最常去的三个地方</h3></div></article>
-          <article class="popular-item"><span class="popular-type type-yellow" aria-hidden="true">01</span><div><span class="pill red">日常</span><h3>第一张放进来的照片</h3></div></article>
-          <article class="popular-item"><img src="./assets/red-city.png" alt="城市街道插画" loading="lazy" /><div><span class="pill green">地点</span><h3>一起走过的几条街</h3></div></article>
-          <article class="popular-item"><span class="popular-type type-black" aria-hidden="true">♪</span><div><span class="pill blue">歌单</span><h3>反复听也不会腻的歌</h3></div></article>
-          <article class="popular-item"><img src="./assets/editorial-weekend.png" alt="两个人讨论地图" loading="lazy" /><div><span class="pill orange">清单</span><h3>还没来得及实现的计划</h3></div></article>
-          <article class="popular-item"><span class="popular-type type-red" aria-hidden="true">+</span><div><span class="pill red">随手记</span><h3>一句话就能想起的事</h3></div></article>
-        </div>
-        <a class="black-strip" href="#weekend">继续往下看 <span aria-hidden="true">↓</span></a>
-      </section>
-
-      <section class="feature-section page-width" id="weekend" aria-labelledby="weekend-title">
-        <div class="section-heading"><h2 id="weekend-title">WEEKEND FILES</h2><span>VIEW THE EDITION</span></div>
-        <div class="feature-rail">
-          <article class="rail-card rail-side"><img src="./assets/shoreline-memory.png" alt="海边散步" loading="lazy" /><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">周末记录</span></div><h3>天气不错，就出门走了走</h3></article>
-          <article class="rail-card rail-feature"><div class="rail-feature-copy"><span class="issue-label">FEATURED / 001</span><h3>没有安排的周末，最后去了海边</h3><p>路上买了喝的，到了以后待到天快黑。照片先放在这一期。</p><span class="pill white">周末记录</span></div><img src="./assets/red-city.png" alt="城市里的两个人" loading="lazy" /></article>
-          <article class="rail-card rail-side"><img src="./assets/train-window.png" alt="旅途窗景" loading="lazy" /><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">旅途</span></div><h3>车窗外的风景，比计划好看</h3></article>
+      <section class="recent content-width" id="recent" aria-labelledby="recent-title">
+        <div class="section-heading"><div><span class="section-number">02 /</span><h2 id="recent-title">最近放进来的</h2><span class="new-tag">NEW</span></div><button class="text-button" type="button" data-all>全部记录 <svg aria-hidden="true" class="icon"><use href="#arrow"/></svg></button></div>
+        <div class="recent-list">
+          <button class="recent-row" type="button" data-story="sea"><span class="row-number">01</span><div class="recent-thumb photo-thumb"><img src="./assets/shoreline-memory.png" alt="海边散步" loading="lazy" /></div><div class="row-copy"><h3>去海边走了走，风比想象中大</h3><p>没有安排的周末，也很好。</p></div><span class="row-category">照片</span><svg aria-hidden="true" class="icon row-arrow"><use href="#arrow-up"/></svg></button>
+          <button class="recent-row" type="button" data-story="train"><span class="row-number">02</span><div class="recent-thumb train-thumb" aria-hidden="true"><svg viewBox="0 0 60 60" fill="none"><rect x="12" y="8" width="36" height="44" rx="10" fill="#fff" stroke="#252620" stroke-width="1.4"/><rect x="16" y="12" width="28" height="26" rx="7" fill="#bfdbcd"/><path d="m16 33 10-9 7 5 7-8 4 5" stroke="#252620" stroke-width="1.4"/><path d="M25 44h10" stroke="#252620" stroke-width="1.4"/></svg></div><div class="row-copy"><h3>下一趟旅行，先定个方向</h3><p>目的地待定，同行的人已经确定。</p></div><span class="row-category">旅行</span><svg aria-hidden="true" class="icon row-arrow"><use href="#arrow-up"/></svg></button>
+          <button class="recent-row" type="button" data-story="food"><span class="row-number">03</span><div class="recent-thumb food-thumb" aria-hidden="true"><svg viewBox="0 0 60 60" fill="none"><circle cx="30" cy="30" r="17" fill="#fff" stroke="#252620" stroke-width="1.4"/><circle cx="30" cy="30" r="12" stroke="#e6d486" stroke-width="1.4"/><path d="M6 13v34M3 13v12h6V13m45 0v34m0-34c-7 9-7 17 0 17" stroke="#252620" stroke-width="1.4" stroke-linecap="round"/></svg></div><div class="row-copy"><h3>上周吃的那家店，值得再去一次</h3><p>记下来，下次就不用再想吃什么。</p></div><span class="row-category">日常</span><svg aria-hidden="true" class="icon row-arrow"><use href="#arrow-up"/></svg></button>
         </div>
       </section>
 
-      <section class="feature-section page-width" id="places" aria-labelledby="places-title">
-        <div class="section-heading"><h2 id="places-title">PLACES &amp; DAYS</h2><span>VIEW ALL</span></div>
-        <div class="place-feature">
-          <img src="./assets/train-window.png" alt="列车窗外的海与山" loading="lazy" />
-          <article class="place-copy"><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">旅行</span></div><h3>去过的地方，先从这一站开始整理</h3><p>照片、车票、吃过的店，以及当时随手写下的备注。每个地点都留一个位置，后面再补上真实的故事。</p><div class="place-byline"><span>OURS / PLACE FILE 01</span><span>TO BE CONTINUED</span></div></article>
-        </div>
-        <div class="two-stories">
-          <article class="split-story"><div><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">地点</span></div><h3>那些说过“下次还来”的小店</h3></div><div class="split-art split-art-blue" aria-hidden="true">AGAIN!</div></article>
-          <article class="split-story"><div><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">清单</span></div><h3>下一次出发前，要记得带的东西</h3></div><div class="split-art split-art-red" aria-hidden="true">✓ ✓ ✓</div></article>
-        </div>
-      </section>
-
-      <section class="feature-section page-width" id="details" aria-labelledby="details-title">
-        <div class="section-heading"><h2 id="details-title">THE LITTLE THINGS</h2><span>VIEW ALL</span></div>
-        <div class="detail-grid">
-          <article class="detail-story"><div class="detail-image"><img src="./assets/editorial-weekend.png" alt="桌上的地图、照片和相机" loading="lazy" /></div><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">随手记</span></div><h3>照片之外，还有票根和几张小纸条</h3></article>
-          <article class="detail-story"><div class="detail-image"><img src="./assets/shoreline-memory.png" alt="海边傍晚" loading="lazy" /></div><div class="story-meta"><span class="play-dot" aria-hidden="true">▶</span><span class="pill red">照片</span></div><h3>手机相册里，总有几张舍不得删</h3></article>
-        </div>
-      </section>
-
-      <section class="closing page-width" aria-labelledby="closing-title"><span>ISSUE 001 / OURS.</span><h2 id="closing-title">下一期，继续更新。</h2><a href="#latest">回到最新</a></section>
+      <section class="ending content-width" aria-label="未完待续"><svg class="ending-flower" aria-hidden="true"><use href="#asterisk"/></svg><p>还有很多空白，<br />留给以后的我们。</p><span class="ending-note">to be continued.</span></section>
     </main>
-
-    <footer class="site-footer"><div class="footer-inner page-width"><div class="footer-top"><a class="wordmark" href="#top">OURS<span>.</span></a><nav aria-label="页脚导航"><a href="#latest">最新</a><a href="#popular">热门</a><a href="#weekend">周末</a><a href="#places">地点</a></nav><span>ISSUE 001</span></div><div class="footer-middle"><p>两个人的照片、地点和小事。<br />想到什么，就继续往里加。</p><strong>OURS.</strong></div><div class="footer-bottom"><span>TWO PEOPLE / ONE ARCHIVE</span><a href="#top">返回顶部 ↑</a></div></div></footer>
-
-    <dialog class="search-dialog" data-search-dialog aria-labelledby="search-title"><div class="search-head"><h2 id="search-title">站内搜索</h2><button type="button" aria-label="关闭搜索" data-search-close>×</button></div><label for="site-search">找一条记录</label><input id="site-search" type="search" placeholder="试试：照片、旅行、海边" autocomplete="off" /><div class="search-results" data-search-results aria-live="polite"></div></dialog>
-  </body>
+    <footer class="site-footer content-width"><a class="footer-brand" href="#top">ours.</a><p>FOR US, BY US.</p><a class="back-top" href="#top">回到顶部 <span aria-hidden="true">↑</span></a></footer>
+  </div>
+  <dialog class="archive-dialog" data-archive-dialog aria-labelledby="dialog-title"><div class="dialog-toolbar"><button class="dialog-back" type="button" data-dialog-back hidden><svg aria-hidden="true" class="icon"><use href="#arrow"/></svg>返回收藏</button><span class="dialog-eyebrow" data-dialog-eyebrow>OUR COLLECTION</span><button class="close-button" type="button" data-dialog-close aria-label="关闭窗口"><svg aria-hidden="true" class="icon"><use href="#close"/></svg></button></div><div data-dialog-content></div></dialog>
+  <dialog class="search-dialog" data-search-dialog aria-labelledby="search-title"><div class="dialog-toolbar"><span class="eyebrow">FIND A LITTLE MEMORY</span><button class="close-button" type="button" data-search-close aria-label="关闭搜索"><svg aria-hidden="true" class="icon"><use href="#close"/></svg></button></div><h2 id="search-title">想找哪一件小事？</h2><label class="search-input-wrap"><svg aria-hidden="true" class="icon"><use href="#search"/></svg><input type="search" id="site-search" placeholder="照片、旅行、海边……" autocomplete="off" aria-label="搜索记录" /></label><p class="search-count" data-search-count aria-live="polite"></p><div class="search-results" data-search-results></div></dialog>
+</body>
 </html>
