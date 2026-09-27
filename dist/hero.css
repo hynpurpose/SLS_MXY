@@ -1,0 +1,428 @@
+/* The opening page of our notebook. */
+:root {
+  --handwriting: "Bradley Hand", "Chalkboard SE", "STKaiti", "KaiTi", cursive;
+}
+.brand span,
+.footer-brand {
+  letter-spacing: -1px;
+}
+.hero.hero-scrapbook {
+  position: relative;
+  display: block;
+  padding: 70px 0 89px;
+  margin-bottom: 51px;
+  isolation: isolate;
+  background: repeating-linear-gradient(to bottom, transparent 0, transparent 27px, #6870600b 27px, #6870600b 28px);
+  background-position: 0 13px;
+}
+.hero-center {
+  position: relative;
+  z-index: 2;
+  width: min(530px, 100%);
+  margin: 0 auto;
+  text-align: center;
+}
+.handwritten {
+  font-family: var(--handwriting);
+  font-weight: 400;
+}
+.hero-kicker {
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  margin: 0 0 28px;
+  transform: rotate(-4deg);
+}
+.hero-kicker::after {
+  content: "";
+  position: absolute;
+  width: 38px;
+  height: 4px;
+  border-top: 1px solid #757969;
+  border-bottom: 1px solid #757969;
+  border-radius: 50%;
+  bottom: -7px;
+  left: 40%;
+  transform: rotate(-3deg);
+}
+.monogram-wrap {
+  position: relative;
+  width: 340px;
+  height: 150px;
+  margin: auto;
+}
+.hero-monogram {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-right: 7px;
+  font-family: Impact, "Arial Narrow", var(--sans);
+  font-size: 122px;
+  font-weight: 900;
+  letter-spacing: -4px;
+  line-height: 1;
+  transform: rotate(-1deg);
+}
+.hero-monogram span {
+  font-size: .87em;
+  margin-inline: 5px;
+}
+.monogram-frame {
+  position: absolute;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  fill: none;
+  stroke: #c68d73;
+  stroke-width: 1.1;
+}
+.monogram-frame path:last-child {
+  opacity: .32;
+  stroke-width: .7;
+}
+.hero-sticker {
+  position: absolute;
+  z-index: 2;
+  display: inline-block;
+  padding: 5px 12px;
+  font-family: var(--handwriting);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: nowrap;
+  box-shadow: 1px 2px 3px #26312409;
+}
+.sticker-us {
+  left: -85px;
+  top: -25px;
+  background: #c8e4d5;
+  transform: rotate(-5deg);
+  border-radius: 5px 3px 5px 3px;
+}
+.sticker-continue {
+  right: -87px;
+  top: -20px;
+  background: #f6e8b0;
+  transform: rotate(3deg);
+  border-radius: 4px 5px 3px 5px;
+}
+.sticker-date {
+  left: -104px;
+  bottom: -25px;
+  padding-inline: 10px;
+  background: #f4d56b;
+  transform: rotate(-4deg);
+  font-size: 13px;
+}
+.sticker-always {
+  right: -91px;
+  bottom: -26px;
+  background: #bee1d0;
+  transform: rotate(6deg);
+  font-size: 14px;
+}
+.hero-sticker svg {
+  position: absolute;
+  width: 39px;
+  height: 30px;
+  fill: none;
+  stroke: #454b40;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.2;
+}
+.sticker-date svg {
+  right: -30px;
+  top: -17px;
+}
+.sticker-always svg {
+  left: -31px;
+  top: -18px;
+}
+.hero-since {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin: 19px 0 38px;
+  font: 8px/1.5 var(--mono);
+  letter-spacing: 1.6px;
+}
+.hero-since>span {
+  width: 5px;
+  height: 5px;
+  background: #677ca9;
+  border-radius: 50%;
+}
+.hero.hero-scrapbook .together-title {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: .02em;
+  line-height: 1.5;
+  font-size: 34px;
+}
+.together-intro {
+  display: block;
+}
+.together-line {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 11px;
+  margin-top: 2px;
+}
+.day-count {
+  position: relative;
+  padding: 0 5px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -2px;
+  line-height: 1.25;
+}
+.day-count::before {
+  content: "";
+  position: absolute;
+  inset: 56% -5px 10%;
+  background: #f6df84;
+  z-index: -1;
+  transform: rotate(-2deg);
+  clip-path: polygon(1% 8%, 99% 0, 98% 90%, 0 100%);
+}
+.day-count svg {
+  position: absolute;
+  width: 104%;
+  height: 12px;
+  bottom: -3px;
+  left: -2%;
+  fill: none;
+  stroke: #a79b60;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+}
+.day-unit {
+  font-size: 31px;
+  margin-left: 3px;
+}
+.together-flower {
+  align-self: center;
+  width: 37px;
+  height: 37px;
+  margin: 9px 0 0 3px;
+  transform: rotate(12deg);
+}
+.hero-afterword {
+  margin: 23px 0 25px;
+  font-size: 17px;
+  letter-spacing: 1px;
+  color: #656b5e;
+  transform: rotate(-2deg);
+}
+.hero-scrapbook .hero-actions {
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.hero-scrapbook .button-dark {
+  gap: 11px;
+  padding: 6px 16px 6px 6px;
+  min-height: 39px;
+  border-radius: 2px;
+  font-size: 11px;
+  letter-spacing: .04em;
+  transform: rotate(-1deg);
+}
+.hero-scrapbook .button-dark:hover {
+  transform: rotate(0) translateY(-2px);
+}
+.button-tile {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  color: #202d38;
+  background: #93addb;
+  font-size: 20px;
+  line-height: 1;
+}
+.hero-scrapbook .random-button {
+  font-size: 11px;
+}
+.hero-photo {
+  position: absolute;
+  z-index: 3;
+  margin: 0;
+  padding: 9px 9px 0;
+  width: clamp(140px, 16%, 187px);
+  background: #fff;
+  border: 1px solid #eceee8;
+  box-shadow: 1px 6px 10px #26302613, 0 1px 2px #26302612;
+  transition: transform .25s, box-shadow .25s;
+}
+.hero-photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.hero-photo figcaption {
+  margin: 0;
+  padding: 12px 0 13px;
+  text-align: center;
+  color: #747a6c;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.photo-left {
+  left: 2.5%;
+  top: 271px;
+  transform: rotate(-7deg);
+}
+.photo-left img {
+  object-position: 65% center;
+}
+.photo-right {
+  right: 2.5%;
+  top: 213px;
+  transform: rotate(7deg);
+}
+.photo-right img {
+  filter: saturate(.72);
+  object-position: 47% center;
+}
+.hero-photo:hover {
+  transform: rotate(0) translateY(-3px);
+  box-shadow: 1px 9px 15px #2630261b;
+}
+.photo-tape {
+  position: absolute;
+  z-index: 1;
+  width: 43px;
+  height: 20px;
+  opacity: .77;
+  clip-path: polygon(2% 0, 99% 3%, 97% 15%, 100% 29%, 98% 44%, 100% 60%, 97% 78%, 100% 99%, 0 96%, 2% 80%, 0 64%, 3% 49%, 0 30%, 3% 17%);
+}
+.tape-blue {
+  left: -15px;
+  top: -3px;
+  background: #b5c4e3;
+  transform: rotate(-39deg);
+}
+.tape-yellow {
+  right: -16px;
+  top: -3px;
+  background: #eee4b5;
+  transform: rotate(40deg);
+}
+.hero-heart {
+  position: absolute;
+  top: 191px;
+  left: 7%;
+  width: 36px;
+  height: 35px;
+  fill: none;
+  stroke: #ac806a;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  transform: rotate(-13deg);
+}
+.hero-scribble {
+  position: absolute;
+  right: 7%;
+  top: 476px;
+  width: 65px;
+  height: 42px;
+  fill: none;
+  stroke: #8b9582;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  transform: rotate(25deg);
+}
+.hero-bottom-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  fill: none;
+  stroke: #c8cebf;
+  stroke-width: .8;
+}
+.hero-bottom-line path:last-child {
+  opacity: .4;
+}
+@media (max-width: 1100px) {
+  .hero.hero-scrapbook { padding-top: 64px; padding-bottom: 73px; }
+  .hero-photo { width: 134px; }
+  .photo-left { left: 0; top: 280px; }
+  .photo-right { right: 0; top: 237px; }
+  .hero-heart { left: 4%; top: 211px; }
+  .hero-scribble { right: 3%; top: 455px; }
+  .monogram-wrap { width: 294px; height: 132px; }
+  .hero-monogram { font-size: 108px; }
+  .hero-sticker { font-size: 12px; }
+  .sticker-us { left: -56px; top: -26px; }
+  .sticker-continue { right: -58px; top: -21px; }
+  .sticker-date { left: -76px; bottom: -23px; }
+  .sticker-always { right: -65px; bottom: -25px; }
+  .hero.hero-scrapbook .together-title { font-size: 29px; }
+  .day-count { font-size: 59px; }
+  .day-unit { font-size: 29px; }
+}
+@media (max-width: 780px) {
+  .hero.hero-scrapbook { padding-top: 58px; padding-bottom: 69px; margin-bottom: 39px; }
+  .hero-photo { width: 107px; padding: 6px 6px 0; }
+  .hero-photo figcaption { font-size: 9px; padding-block: 10px; }
+  .photo-left { left: -3px; top: 283px; }
+  .photo-right { right: -3px; top: 249px; }
+  .hero-heart { left: 3%; width: 27px; }
+  .hero-scribble { right: 2%; width: 48px; top: 420px; }
+  .hero.hero-scrapbook .together-title { font-size: 25px; }
+  .day-count { font-size: 51px; }
+  .day-unit { font-size: 26px; }
+  .together-flower { width: 28px; height: 28px; }
+  .hero-afterword { font-size: 15px; }
+}
+@media (max-width: 560px) {
+  .hero.hero-scrapbook { padding-top: 42px; padding-bottom: 46px; margin-bottom: 31px; }
+  .hero-center { width: 100%; }
+  .hero-kicker { font-size: 14px; margin-bottom: 30px; }
+  .monogram-wrap { width: 207px; height: 100px; }
+  .hero-monogram { font-size: 79px; letter-spacing: -2px; padding-right: 3px; }
+  .hero-monogram span { margin-inline: 3px; }
+  .hero-sticker { font-size: 10px; padding: 3px 7px; }
+  .sticker-us { left: -28px; top: -22px; }
+  .sticker-continue { right: -24px; top: -20px; }
+  .sticker-date { left: -35px; bottom: -23px; font-size: 10px; }
+  .sticker-always { right: -27px; bottom: -24px; font-size: 11px; }
+  .hero-sticker svg { width: 24px; height: 23px; }
+  .sticker-date svg { right: -19px; top: -13px; }
+  .sticker-always svg { left: -20px; top: -13px; }
+  .hero-since { font-size: 6px; letter-spacing: .65px; gap: 5px; margin-top: 42px; margin-bottom: 225px; }
+  .hero-since>span { width: 4px; height: 4px; }
+  .hero-photo { width: 117px; padding: 6px 6px 0; }
+  .photo-left { top: 277px; left: calc(50% - 131px); transform: rotate(-8deg); }
+  .photo-right { top: 259px; right: calc(50% - 131px); transform: rotate(7deg); }
+  .hero-photo figcaption { font-size: 9px; padding-block: 9px; }
+  .photo-tape { width: 32px; height: 16px; }
+  .tape-blue { left: -10px; top: -3px; }
+  .tape-yellow { right: -11px; top: -3px; }
+  .hero-heart { top: 302px; left: calc(50% - 13px); width: 27px; height: 27px; transform: rotate(12deg); }
+  .hero-scribble { display: none; }
+  .hero.hero-scrapbook .together-title { font-size: 25px; letter-spacing: .02em; }
+  .together-line { gap: 9px; margin-top: 3px; }
+  .day-count { font-size: 55px; }
+  .day-unit { font-size: 28px; }
+  .together-flower { width: 29px; height: 29px; margin-left: 1px; }
+  .hero-afterword { font-size: 15px; margin-top: 19px; margin-bottom: 22px; }
+  .hero-scrapbook .hero-actions { gap: 18px; }
+  .hero-scrapbook .button-dark { font-size: 10px; padding-right: 12px; min-height: 37px; }
+  .hero-scrapbook .random-button { font-size: 10px; }
+  .button-tile { width: 25px; height: 25px; font-size: 18px; }
+  .hero-bottom-line { height: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo { transition: none; }
+}

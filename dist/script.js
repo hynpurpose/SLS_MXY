@@ -1,3 +1,26 @@
+// Calendar days since 2021-10-21, midnight in China (the start date is day 0).
+function getTogetherDays(now = new Date()) {
+  const start = Date.parse("2021-10-21T00:00:00+08:00");
+  return Math.max(0, Math.floor((now.getTime() - start) / 86_400_000));
+}
+
+const togetherCounter = document.querySelector("[data-together-days]");
+let togetherTimer;
+function updateTogetherDays() {
+  const now = new Date();
+  if (togetherCounter) togetherCounter.textContent = String(getTogetherDays(now));
+  clearTimeout(togetherTimer);
+  const day = 86_400_000;
+  const chinaOffset = 8 * 60 * 60 * 1000;
+  const nextMidnight = (Math.floor((now.getTime() + chinaOffset) / day) + 1) * day - chinaOffset;
+  togetherTimer = setTimeout(updateTogetherDays, nextMidnight - now.getTime() + 100);
+}
+updateTogetherDays();
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) updateTogetherDays();
+});
+window.addEventListener("pageshow", updateTogetherDays);
+
 const stories = [
   { id: "sea", category: "photos", title: "去海边走了走，风比想象中大", note: "没有安排的周末，也很好。", image: "./assets/shoreline-memory.png", alt: "两个人在海边散步的示意照片", paragraphs: ["路上买了喝的，到了以后待到天快黑。没有特别的安排，就沿着海边慢慢走。", "风比想象中大，照片里头发也有点乱。但那天很开心，所以还是想把它留下来。"] },
   { id: "first", category: "photos", title: "第 01 期：先把最近的事放上来", note: "我们的第一份小小存档。", image: "./assets/editorial-weekend.png", alt: "两个人看地图、拍照的插画", paragraphs: ["两个人的照片、去过的地方，还有最近发生的小事。先从这些开始。", "不着急一次整理完，想到什么，就继续往里加。"] },
@@ -92,7 +115,7 @@ function openStory(id, fromCollection = null) {
   const next = element("button", "", "再翻一条 ↗");
   next.type = "button";
   next.addEventListener("click", openRandomStory);
-  end.append(element("span", "", "A LITTLE MEMORY, OURS."), next);
+  end.append(element("span", "", "A LITTLE MEMORY, S&M."), next);
   content.push(body, end);
   archiveContent.replaceChildren(...content);
   backButton.hidden = !fromCollection;
