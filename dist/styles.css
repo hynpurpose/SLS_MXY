@@ -15,6 +15,7 @@ button { font: inherit; }
 .brand-kicker { display: block; font: 500 10px/1.25 'DM Mono', monospace; letter-spacing: .12em; }
 .game-brand h1 { margin: 2px 0 0; font-size: clamp(15px, 1.35vw, 19px); line-height: 1.2; letter-spacing: .06em; }
 .back-home { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 2px solid #252820; border-radius: 99px; color: #252820; background: #fffaf0; box-shadow: 3px 4px 0 #252820; font-weight: 700; font-size: 13px; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease; }
+.back-home[hidden] { display: none; }
 .back-home:hover { transform: translateY(-3px); box-shadow: 3px 7px 0 #252820; }
 .progress { position: fixed; z-index: 5; top: clamp(92px, 9.8vw, 142px); right: clamp(20px, 4.8vw, 72px); width: clamp(202px, 18.5vw, 260px); padding: 17px 18px 15px; border: 2px solid #252820; border-radius: 18px; background: #fffaf0; box-shadow: 5px 6px 0 #252820; transform: rotate(2deg); }
 .progress-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-weight: 800; font-size: 15px; }

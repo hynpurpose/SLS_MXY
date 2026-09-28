@@ -5,7 +5,8 @@ const KEY = 'sm-birthday-2026:clues:v1';
 export function getProgress() {
   try {
     const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
-    return { completedStages: STAGE_IDS.filter((id) => saved.completedStages?.includes(id)) };
+    const validStages = Array.isArray(saved.completedStages) ? saved.completedStages : [];
+    return { completedStages: STAGE_IDS.filter((id) => validStages.includes(id)) };
   } catch {
     return { completedStages: [] };
   }
