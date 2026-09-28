@@ -1,11 +1,11 @@
 import { STAGE_IDS, getProgress } from './state.js';
 
 const lines = [
-  '嘘，欢迎来到月光寄存站。今晚，我一直在等你。',
+  '嘘，欢迎来到礼物寄存站。今晚，我一直在等你。',
   '狗蛋早就为你准备好了 2026 年的生日礼物。',
-  '可是刚才，影子收藏家偷偷把礼物藏了起来。',
-  '他把打开礼物的办法，拆成了三条线索。',
-  '经过三关，把线索一条条带回来，我就能帮你打开最后一道锁。',
+  '可是刚才，影子大盗趁没人注意，把礼物藏了起来。',
+  '他自以为藏得天衣无缝，却不小心留下了三条线索。',
+  '闯过三关，把线索一条条找回来，我们就能解开礼物的秘密。',
   '别担心，我会一直在这里等你。准备好开始了吗？'
 ];
 
@@ -16,6 +16,7 @@ const next = document.querySelector('[data-next]');
 const hint = document.querySelector('[data-dialogue-hint]');
 const mission = document.querySelector('[data-mission-note]');
 const replay = document.querySelector('[data-replay]');
+const thief = document.querySelector('[data-thief]');
 let currentLine = 0;
 
 function renderLine() {
@@ -26,6 +27,7 @@ function renderLine() {
   lineCount.textContent = `${String(currentLine + 1).padStart(2, '0')} / ${String(lines.length).padStart(2, '0')}`;
   hint.textContent = currentLine === lines.length - 1 ? '三条线索，在前方等你' : '点一下，听我慢慢说';
   next.firstChild.textContent = currentLine === lines.length - 1 ? '记下任务 ' : '继续听 ';
+  thief.hidden = currentLine !== 2 && currentLine !== 3;
 }
 
 function advance() {
