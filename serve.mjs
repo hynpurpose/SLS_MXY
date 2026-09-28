@@ -1,26 +1,37 @@
-import { createReadStream } from "node:fs";
+import { createReadStream, existsSync } from "node:fs";
 import { stat } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, join, normalize } from "node:path";
 
-const root = join(process.cwd(), "dist");
+const distRoot = join(process.cwd(), "dist");
+const publicRoot = join(process.cwd(), "public");
 const port = 5200;
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
+  ".jpeg": "image/jpeg",
+  ".jpg": "image/jpeg",
   ".js": "text/javascript; charset=utf-8",
   ".png": "image/png",
   ".svg": "image/svg+xml",
   ".woff2": "font/woff2",
 };
 
+function resolveFile(requestedPath) {
+  const relativePath = normalize(decodeURIComponent(requestedPath)).replace(/^(\.\.[/\\])+/, "");
+  const publicPath = join(publicRoot, relativePath);
+  if (publicPath.startsWith(publicRoot) && existsSync(publicPath)) return publicPath;
+  const distPath = join(distRoot, relativePath);
+  if (!distPath.startsWith(distRoot)) return null;
+  return distPath;
+}
+
 const server = createServer(async (request, response) => {
   const url = new URL(request.url ?? "/", `http://${request.headers.host}`);
   const requestedPath = url.pathname === "/" ? "/index.html" : url.pathname;
-  const relativePath = normalize(decodeURIComponent(requestedPath)).replace(/^(\.\.[/\\])+/, "");
-  const filePath = join(root, relativePath);
+  const filePath = resolveFile(requestedPath);
 
-  if (!filePath.startsWith(root)) {
+  if (!filePath) {
     response.writeHead(403).end("Forbidden");
     return;
   }
