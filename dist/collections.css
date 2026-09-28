@@ -1,0 +1,37 @@
+/* Collection illustrations share the light, outlined character style. */
+.collections .collection-grid { gap: 30px; margin-top: 32px; }
+.collections .collection-card { padding: 0 18px 25px; }
+.collections .collection-art {
+  height: 254px;
+  margin: 0 0 19px;
+}
+.collections .object-art {
+  width: min(100%, 300px);
+  height: 246px;
+  max-height: none;
+  object-fit: contain;
+  transform: scale(1.18);
+}
+.collections .collection-card:hover .object-art {
+  transform: translateY(-4px) scale(1.18);
+}
+@media (max-width: 1100px) {
+  .collections .collection-grid { gap: 13px; margin-top: 25px; }
+  .collections .collection-card { padding: 0 12px 20px; }
+  .collections .collection-art { height: 215px; margin-bottom: 15px; }
+  .collections .object-art { height: 210px; }
+}
+@media (max-width: 780px) {
+  .collections .collection-grid { gap: 6px; }
+  .collections .collection-card { padding: 0 8px 18px; }
+  .collections .collection-art { height: 173px; margin-bottom: 11px; }
+  .collections .object-art { height: 170px; transform: scale(1.08); }
+  .collections .collection-card:hover .object-art { transform: translateY(-3px) scale(1.08); }
+}
+@media (max-width: 560px) {
+  .collections .collection-grid { gap: 12px; }
+  .collections .collection-card { padding: 10px 13px 10px 4px; }
+  .collections .collection-art { height: 148px; margin: 0; }
+  .collections .object-art { height: 145px; max-height: 145px; transform: scale(1.05); }
+  .collections .collection-card:hover .object-art { transform: translateY(-2px) scale(1.05); }
+}

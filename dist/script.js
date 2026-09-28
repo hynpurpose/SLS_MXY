@@ -5,21 +5,84 @@ function getTogetherDays(now = new Date()) {
 }
 
 const togetherCounter = document.querySelector("[data-together-days]");
+const todayDate = document.querySelector("[data-today-date]");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let togetherTimer;
+let counting = false;
+let countFrame = 0;
+function formatChinaDate(now) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now).replaceAll("-", ".");
+}
+function writeDays(value) {
+  if (togetherCounter) togetherCounter.textContent = String(value);
+}
+function animateTogetherDays(target) {
+  if (!togetherCounter || reduceMotion) {
+    counting = false;
+    writeDays(target);
+    return;
+  }
+  cancelAnimationFrame(countFrame);
+  counting = true;
+  togetherCounter.setAttribute("aria-live", "off");
+  writeDays(target);
+  togetherCounter.style.minWidth = `${togetherCounter.offsetWidth}px`;
+  writeDays(0);
+  const start = performance.now();
+  const duration = 2400;
+  const tick = (now) => {
+    const progress = Math.min(1, (now - start) / duration);
+    const eased = progress === 1 ? 1 : 1 - 2 ** (-10 * progress);
+    writeDays(Math.round(eased * target));
+    if (progress < 1) {
+      countFrame = requestAnimationFrame(tick);
+      return;
+    }
+    counting = false;
+    togetherCounter.style.minWidth = "";
+    togetherCounter.setAttribute("aria-live", "polite");
+  };
+  countFrame = requestAnimationFrame(tick);
+}
 function updateTogetherDays() {
   const now = new Date();
-  if (togetherCounter) togetherCounter.textContent = String(getTogetherDays(now));
+  const days = getTogetherDays(now);
+  if (!counting) writeDays(days);
+  if (todayDate) {
+    const label = formatChinaDate(now);
+    todayDate.textContent = label;
+    todayDate.dateTime = label.replaceAll(".", "-");
+  }
   clearTimeout(togetherTimer);
   const day = 86_400_000;
   const chinaOffset = 8 * 60 * 60 * 1000;
   const nextMidnight = (Math.floor((now.getTime() + chinaOffset) / day) + 1) * day - chinaOffset;
   togetherTimer = setTimeout(updateTogetherDays, nextMidnight - now.getTime() + 100);
 }
+if (togetherCounter && !reduceMotion) {
+  counting = true;
+  togetherCounter.textContent = "0";
+}
 updateTogetherDays();
+animateTogetherDays(getTogetherDays());
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) updateTogetherDays();
 });
 window.addEventListener("pageshow", updateTogetherDays);
+
+// Keep the last hovered photo above the rest of the collage.
+const heroPhotos = [...document.querySelectorAll(".hero-collage .hero-photo")];
+let frontPhotoLayer = 6;
+heroPhotos.forEach(photo => {
+  photo.addEventListener("pointerenter", () => {
+    photo.style.zIndex = String(++frontPhotoLayer);
+  });
+});
 
 const stories = [
   { id: "sea", category: "photos", title: "去海边走了走，风比想象中大", note: "没有安排的周末，也很好。", image: "./assets/shoreline-memory.png", alt: "两个人在海边散步的示意照片", paragraphs: ["路上买了喝的，到了以后待到天快黑。没有特别的安排，就沿着海边慢慢走。", "风比想象中大，照片里头发也有点乱。但那天很开心，所以还是想把它留下来。"] },
@@ -41,10 +104,6 @@ const archiveDialog = document.querySelector("[data-archive-dialog]");
 const archiveContent = document.querySelector("[data-dialog-content]");
 const backButton = document.querySelector("[data-dialog-back]");
 const dialogEyebrow = document.querySelector("[data-dialog-eyebrow]");
-const searchDialog = document.querySelector("[data-search-dialog]");
-const searchField = document.querySelector("#site-search");
-const searchResults = document.querySelector("[data-search-results]");
-const searchCount = document.querySelector("[data-search-count]");
 let currentCollection = null;
 let lastStoryId = null;
 
@@ -70,7 +129,6 @@ function makeStoryRow(story, index, fromCollection = null) {
   copy.append(element("h3", "", story.title), element("p", "", story.note));
   button.append(element("span", "item-number", String(index + 1).padStart(2, "0")), copy, arrowIcon());
   button.addEventListener("click", () => {
-    if (searchDialog.open) searchDialog.close();
     openStory(story.id, fromCollection);
   });
   return button;
@@ -128,36 +186,22 @@ function openRandomStory() {
   const next = candidates[Math.floor(Math.random() * candidates.length)];
   openStory(next.id);
 }
-function renderSearch(query = "") {
-  const value = query.trim().toLocaleLowerCase("zh-CN");
-  const matching = stories.filter(story => `${story.title} ${story.note} ${collections[story.category].label} ${story.paragraphs.join(" ")}`.toLocaleLowerCase("zh-CN").includes(value));
-  searchResults.replaceChildren();
-  searchCount.textContent = value ? `找到 ${matching.length} 条相关记录` : "从这些小事开始翻翻";
-  matching.forEach((story, index) => searchResults.append(makeStoryRow(story, index)));
-  if (!matching.length) searchResults.append(element("p", "empty-result", "还没找到，换个词再试试。"));
-}
-
 document.querySelectorAll("[data-collection]").forEach(button => button.addEventListener("click", () => openCollection(button.dataset.collection)));
 document.querySelectorAll("[data-story]").forEach(button => button.addEventListener("click", () => openStory(button.dataset.story)));
 document.querySelector("[data-all]").addEventListener("click", () => openCollection("all"));
-document.querySelector("[data-random]").addEventListener("click", openRandomStory);
 backButton.addEventListener("click", () => currentCollection && openCollection(currentCollection));
 document.querySelector("[data-dialog-close]").addEventListener("click", () => archiveDialog.close());
-document.querySelector("[data-search-open]").addEventListener("click", () => {
-  renderSearch(searchField.value);
-  searchDialog.showModal();
-  searchField.focus();
+let backdropPress = false;
+function isOutsideArchive(event) {
+  const box = archiveDialog.getBoundingClientRect();
+  return event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
+}
+archiveDialog.addEventListener("pointerdown", event => {
+  backdropPress = event.target === archiveDialog && isOutsideArchive(event);
 });
-document.querySelector("[data-search-close]").addEventListener("click", () => searchDialog.close());
-searchField.addEventListener("input", () => renderSearch(searchField.value));
-[archiveDialog, searchDialog].forEach(dialog => {
-  let backdropPress = false;
-  const outside = event => {
-    const box = dialog.getBoundingClientRect();
-    return event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
-  };
-  dialog.addEventListener("pointerdown", event => { backdropPress = event.target === dialog && outside(event); });
-  dialog.addEventListener("click", event => { if (backdropPress && event.target === dialog && outside(event)) dialog.close(); backdropPress = false; });
+archiveDialog.addEventListener("click", event => {
+  if (backdropPress && event.target === archiveDialog && isOutsideArchive(event)) archiveDialog.close();
+  backdropPress = false;
 });
 const navLinks = [...document.querySelectorAll(".nav-link")];
 function updateNavigation() {
