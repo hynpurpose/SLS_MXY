@@ -3,67 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f4f4f2" />
-  <meta name="description" content="沿着三张照片，找到下一站。" />
-  <title>下一站 · 一场关于我们的寻找</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4f4f2'/%3E%3Cpath d='M7 24 25 8' stroke='%231c1d1e' stroke-width='2'/%3E%3Ccircle cx='7' cy='24' r='3' fill='%231c1d1e'/%3E%3Ccircle cx='25' cy='8' r='3' fill='%231c1d1e'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#f7f1e4" />
+  <meta name="description" content="月光寄存站：跟着夜班站长，收集三条线索，找回狗蛋准备的生日礼物。" />
+  <title>月光寄存站 · 2026 生日任务</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
   <link rel="stylesheet" href="./styles.css" />
-  <script defer src="./script.js"></script>
+  <script type="module" src="./script.js"></script>
 </head>
 <body>
-  <div class="game-app">
+  <main class="game">
+    <div class="scene" aria-hidden="true"></div>
+    <div class="scene-wash" aria-hidden="true"></div>
     <header class="game-header">
-      <div class="game-brand"><strong>下一站</strong><span>一场关于我们的寻找</span></div>
-      <div class="header-right"><span class="header-progress" id="header-progress">0 / 3 已完成</span><button class="reset-button" id="reset-button" type="button">重新开始</button></div>
+      <div class="game-brand" aria-label="2026 生日任务：月光寄存站">
+        <span class="brand-icon" aria-hidden="true">✳</span>
+        <div><span class="brand-kicker">2026 · BIRTHDAY QUEST</span><h1>月光寄存站</h1></div>
+      </div>
+      <a class="back-home" href="http://127.0.0.1:5200/" data-home-link>返回首页 <span aria-hidden="true">↗</span></a>
     </header>
-
-    <nav class="journey-track" aria-label="游戏进度">
-      <div class="track-stop" data-stop="0"><span class="track-dot">01</span><span>照片</span></div>
-      <div class="track-stop" data-stop="1"><span class="track-dot">02</span><span>街道</span></div>
-      <div class="track-stop" data-stop="2"><span class="track-dot">03</span><span>海边</span></div>
-      <div class="track-stop gift-stop" data-stop="3"><span class="track-dot">04</span><span>礼物</span></div>
-    </nav>
-
-    <main class="game-main" id="main">
-      <section class="game-screen" id="game-screen" aria-labelledby="stage-title">
-        <aside class="stage-info">
-          <p class="stage-count" id="stage-count">01 / 03</p>
-          <h1 id="stage-title">第一张照片</h1>
-          <p class="stage-story" id="stage-story">大学时，小店门口的那一晚。</p>
-          <div class="mission">
-            <div class="mission-label"><span>目标</span><span id="mission-count">0 / 3</span></div>
-            <p id="mission-instruction">在照片里找到月亮、饮料和门口的灯。</p>
-            <div class="mission-items" id="mission-items"></div>
-          </div>
-          <p class="feedback" id="feedback" aria-live="polite">轻触照片，开始寻找。</p>
-          <button class="hint-button" id="hint-button" type="button" aria-expanded="false">显示提示</button>
-          <p class="hint-text" id="hint-text" hidden></p>
-        </aside>
-        <div class="play-area">
-          <div class="scene" id="scene" aria-label="互动照片"></div>
-          <div class="scene-bottom"><span id="scene-label">第一张照片</span><span id="scene-control">寻找画面中的物件</span></div>
-          <div class="stage-clear" id="stage-clear" hidden>
-            <p class="clear-label">地点已找到</p>
-            <h2 id="clear-title">第一站完成</h2>
-            <p id="clear-clue"></p>
-            <button class="next-button" id="next-button" type="button">继续 <span aria-hidden="true">→</span></button>
-          </div>
-        </div>
-      </section>
-
-      <section class="final-screen" id="final-screen" aria-labelledby="final-title" hidden>
-        <p class="stage-count">03 / 03</p>
-        <h1 id="final-title">三处回忆，<br />都找到了。</h1>
-        <p class="final-lead">现在，打开留给你的下一站。</p>
-        <button class="next-button" id="open-gift" type="button">打开礼物 <span aria-hidden="true">→</span></button>
-        <div class="gift-reveal" id="gift-reveal" hidden>
-          <p>下一站</p>
-          <h2>找一个周末，出发吧。</h2>
-          <p>你挑时间。路程、酒店和晚餐由我安排。去一个你说过想去的地方，慢慢待两天。</p>
-          <span>目的地和日期，我们一起定。</span>
-        </div>
-      </section>
-    </main>
-  </div>
+    <aside class="progress" aria-label="礼物线索进度">
+      <div class="progress-top"><span>礼物线索</span><strong data-progress-count>0 <small>/ 3</small></strong></div>
+      <div class="progress-slots" aria-label="三条线索尚未收集" data-progress-slots>
+        <span class="progress-slot" data-slot="1" aria-hidden="true">1</span>
+        <span class="progress-slot" data-slot="2" aria-hidden="true">2</span>
+        <span class="progress-slot" data-slot="3" aria-hidden="true">3</span>
+      </div>
+      <p>集齐三条，才能打开礼物。</p>
+    </aside>
+    <div class="scene-label" aria-hidden="true"><span>✦</span> 营业中 · 只接收特别的礼物 <span>✦</span></div>
+    <figure class="npc" aria-label="夜班站长，一只拿着钥匙的手绘小猫">
+      <img src="./assets/station-cat.png" alt="" width="640" height="960" fetchpriority="high" />
+      <figcaption>夜班站长</figcaption>
+    </figure>
+    <section class="dialogue" aria-labelledby="dialogue-speaker" data-dialogue>
+      <div class="dialogue-head"><span class="speaker" id="dialogue-speaker">夜班站长 <span aria-hidden="true">✳</span></span><span class="line-count" data-line-count>01 / 06</span></div>
+      <p class="dialogue-text" data-dialogue-text aria-live="polite" aria-atomic="true"></p>
+      <div class="dialogue-foot">
+        <span class="dialogue-hint" data-dialogue-hint>点一下，听我慢慢说</span>
+        <button class="next-button" type="button" data-next>继续听 <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+    <div class="mission-note" data-mission-note hidden>
+      <span aria-hidden="true">✉</span>
+      <p>任务已记下。<br><strong>第一关的入口，下一步见。</strong></p>
+      <button type="button" data-replay>再听一遍</button>
+    </div>
+  </main>
 </body>
 </html>
