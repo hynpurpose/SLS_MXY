@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap');
+
+:root { font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; color: #252820; background: #f7f1e4; font-synthesis: none; }
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
+.game { position: relative; isolation: isolate; width: 100%; height: 100svh; min-height: 560px; overflow: hidden; background: #f7f1e4; }
+.world-track { position: absolute; z-index: 1; inset: 0 auto 0 0; display: flex; width: 200%; height: 100%; transform: translateX(0); transition: transform 1.35s cubic-bezier(.7,.03,.24,1); }
+.game.is-searching .world-track { transform: translateX(-50%); transition-delay: .22s; }
+.room { position: relative; isolation: isolate; flex: 0 0 50%; height: 100%; overflow: hidden; }
+.scene, .scene-wash { position: absolute; inset: 0; pointer-events: none; }
+.scene { z-index: -2; background: url('./assets/gift-station-night.jpg') center center / cover no-repeat; }
+.scene-wash { z-index: -1; background: linear-gradient(90deg, rgba(248,243,233,.30), transparent 50%), linear-gradient(0deg, rgba(248,243,233,.25), transparent 45%); }
+.search-room { background: url('./assets/clue-room-wide.jpg') center center / cover no-repeat; }
+.scene-glow { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.scene-glow-mobile { display: none; }
+.scene-glow-object { opacity: 0; transition: opacity .18s ease; filter: drop-shadow(0 0 11px #fff1a0) drop-shadow(0 0 17px #fbe07c); }
+.scene-glow-object image { filter: brightness(1.24) saturate(1.28); }
+.scene-glow-object path { fill: none; stroke: #fff4b6; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: .8; }
+.scene-glow-items use { fill: none; stroke: #fff4b6; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; opacity: .5; }
+.search-room[data-active-object="clue-1"] .scene-glow-map,
+.search-room[data-active-object="clue-2"] .scene-glow-items,
+.search-room[data-active-object="clue-3"] .scene-glow-tv { opacity: 1; }
+.game-header { position: relative; z-index: 4; display: flex; align-items: flex-start; justify-content: space-between; padding: clamp(20px, 3.3vw, 48px) clamp(20px, 4.8vw, 72px); }
+.game-brand { display: flex; align-items: center; gap: 12px; padding: 10px 18px 12px 12px; border: 2px solid #252820; border-radius: 18px; background: #fffaf0; box-shadow: 4px 5px 0 #252820; transform: rotate(-2deg); }
+.brand-icon { display: grid; place-items: center; width: 40px; height: 40px; border: 2px solid #252820; border-radius: 12px; background: #f4db72; font-size: 26px; line-height: 1; }
+.brand-kicker { display: block; font: 500 10px/1.25 'DM Mono', monospace; letter-spacing: .12em; }
+.game-brand h1 { margin: 2px 0 0; font-size: clamp(15px, 1.35vw, 19px); line-height: 1.2; letter-spacing: .06em; }
+.back-home { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 2px solid #252820; border-radius: 99px; color: #252820; background: #fffaf0; box-shadow: 3px 4px 0 #252820; font-weight: 700; font-size: 13px; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease; }
+.back-home[hidden] { display: none; }
+.back-home:hover { transform: translateY(-3px); box-shadow: 3px 7px 0 #252820; }
+.progress { position: fixed; z-index: 5; top: clamp(92px, 9.8vw, 142px); right: clamp(20px, 4.8vw, 72px); width: clamp(202px, 18.5vw, 260px); padding: 17px 18px 15px; border: 2px solid #252820; border-radius: 18px; background: #fffaf0; box-shadow: 5px 6px 0 #252820; transform: rotate(2deg); }
+.progress-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-weight: 800; font-size: 15px; }
+.progress-top strong { font: 500 27px/1 'DM Mono', monospace; white-space: nowrap; }
+.progress-top small { color: #757971; font-size: 15px; }
+.progress-slots { display: flex; gap: 10px; margin: 15px 0 10px; }
+.progress-slot { display: grid; place-items: center; width: 36px; height: 36px; border: 2px dashed #8e958b; border-radius: 50%; color: #838b80; background: #f2f1e8; font: 500 14px/1 'DM Mono', monospace; }
+.progress-slot.is-found { border: 2px solid #252820; color: #252820; background: #d9ff76; }
+.progress p { margin: 0; color: #696f67; font-size: 11px; line-height: 1.5; }
+.scene-label { position: absolute; z-index: 1; top: 22%; left: 49%; padding: 7px 14px; border: 2px solid #252820; border-radius: 8px; background: #f8dd73; box-shadow: 3px 4px 0 #252820; font-weight: 800; font-size: 12px; letter-spacing: .04em; transform: rotate(5deg); }
+.scene-label span { color: #bf5963; }
+.npc { position: absolute; z-index: 2; left: 61.8%; bottom: 7%; width: clamp(250px, 31vw, 460px); margin: 0; transform: translateX(-50%); filter: drop-shadow(7px 9px 0 rgba(39,43,34,.2)); animation: npc-bob 3.7s ease-in-out infinite; }
+.npc[hidden] { display: none; }
+.game.is-searching .npc { opacity: 0; transition: opacity .18s ease; }
+.npc img { display: block; width: 100%; height: auto; }
+.npc figcaption { position: absolute; bottom: 4%; left: 15%; padding: 6px 11px; border: 2px solid #252820; border-radius: 6px; background: #d9ff76; box-shadow: 2px 3px 0 #252820; font-size: 12px; font-weight: 800; transform: rotate(-6deg); }
+.thief { position: absolute; z-index: 2; left: 86%; bottom: 9%; width: clamp(155px, 18vw, 250px); margin: 0; transform: translateX(-50%) rotate(5deg); filter: drop-shadow(6px 8px 0 rgba(39,43,34,.18)); }
+.thief[hidden] { display: none; }
+.thief:not([hidden]) { animation: thief-appear .35s cubic-bezier(.2, 1.4, .5, 1) both; }
+.thief img { display: block; width: 100%; height: auto; }
+.thief figcaption { position: absolute; bottom: 1%; left: 19%; padding: 5px 10px; border: 2px solid #252820; border-radius: 6px; background: #d7c4ed; box-shadow: 2px 3px 0 #252820; font-size: 11px; font-weight: 800; white-space: nowrap; transform: rotate(-8deg); }
+@keyframes npc-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+@keyframes thief-appear { from { opacity: 0; translate: 0 16px; scale: .8; } to { opacity: 1; translate: 0 0; scale: 1; } }
+.dialogue { position: absolute; z-index: 3; left: clamp(20px, 5vw, 76px); bottom: clamp(28px, 6vh, 74px); width: min(540px, 44vw); min-height: 232px; display: flex; flex-direction: column; padding: 22px 25px 20px; border: 2px solid #252820; border-radius: 22px 22px 22px 7px; background: #fffaf0; box-shadow: 7px 8px 0 #252820; }
+.dialogue[hidden] { display: none; }
+.dialogue::after { position: absolute; top: 56px; right: -15px; width: 24px; height: 24px; border-top: 2px solid #252820; border-right: 2px solid #252820; background: #fffaf0; content: ''; transform: rotate(45deg); }
+.dialogue-head, .dialogue-foot { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+.speaker { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; }
+.speaker span { color: #d66670; font-size: 20px; }
+.line-count { font: 500 12px/1.3 'DM Mono', monospace; letter-spacing: .08em; color: #797c73; }
+.dialogue-text { flex: 1; display: flex; align-items: center; margin: 15px 0 22px; font-size: clamp(22px, 2.15vw, 32px); line-height: 1.55; letter-spacing: .025em; font-weight: 800; text-wrap: pretty; animation: line-in .28s ease both; }
+@keyframes line-in { from { opacity: .25; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+.dialogue-hint { color: #797c73; font-size: 11px; }
+.next-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 42px; padding: 8px 17px; border: 2px solid #252820; border-radius: 99px; background: #d9ff76; box-shadow: 2px 3px 0 #252820; color: #252820; cursor: pointer; font-size: 14px; font-weight: 800; white-space: nowrap; transition: transform .18s ease, box-shadow .18s ease; }
+.next-button:hover { transform: translateY(-3px); box-shadow: 2px 6px 0 #252820; }
+.next-button:active { transform: translateY(2px); box-shadow: 1px 1px 0 #252820; }
+.next-button span { font-size: 18px; }
+.search-guide { position: absolute; z-index: 2; bottom: clamp(82px, 13vh, 145px); left: clamp(22px, 5vw, 74px); width: min(285px, 28vw); display: block; padding: 15px 18px; border: 2px solid #252820; border-radius: 16px; background: #fffaf0; color: inherit; box-shadow: 4px 5px 0 #252820; text-align: left; cursor: pointer; transform: rotate(-2deg); transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease; }
+.search-guide:hover { background: #fffdf6; box-shadow: 4px 8px 0 #252820; transform: rotate(-2deg) translateY(-3px); }
+.search-room.is-hinting .search-guide { background: #f3f8df; }
+.search-guide-kicker { display: block; color: #69766a; font: 500 10px/1.4 'DM Mono', monospace; letter-spacing: .08em; }
+.search-guide-title { display: block; margin: 5px 0 4px; font-size: clamp(16px, 1.65vw, 23px); font-weight: 800; line-height: 1.3; }
+.search-guide-copy { display: block; color: #626962; font-size: 12px; font-weight: 500; line-height: 1.45; }
+.scene-target { position: absolute; z-index: 2; display: block; padding: 0; border: 0; border-radius: 12px; background: transparent; cursor: pointer; touch-action: manipulation; }
+.scene-target:focus-visible { outline: none; }
+.scene-target::after { position: absolute; top: -17px; right: -9px; width: 30px; height: 30px; background: #fff4ad; clip-path: polygon(50% 0, 60% 39%, 100% 50%, 60% 61%, 50% 100%, 40% 61%, 0 50%, 40% 39%); content: ''; filter: drop-shadow(0 0 7px #ffe487); opacity: 0; pointer-events: none; transform: scale(.5) rotate(-20deg); transition: opacity .18s ease, transform .18s ease; }
+.scene-target-items::after { top: auto; right: 8px; bottom: -4px; }
+.scene-target:hover::after, .scene-target:focus-visible::after, .scene-target:active::after { opacity: 1; transform: scale(1) rotate(0); }
+.scene-target-map { left: 24%; top: 9%; width: 30%; height: 39%; }
+.scene-target-items { left: 44%; top: 62%; width: 26%; height: 16%; }
+.scene-target-tv { left: 64%; top: 25%; width: 17%; height: 22%; }
+.clue-marker { position: absolute; z-index: 3; display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px 6px 7px; border: 2px solid #252820; border-radius: 100px; background: #fffaf0; color: #252820; box-shadow: 3px 4px 0 #252820; cursor: pointer; white-space: nowrap; transform: translate(-50%, -50%) rotate(-3deg); transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease; }
+.clue-marker[hidden] { display: none !important; }
+.search-room.is-hinting .clue-marker { animation: clue-hint-in .34s cubic-bezier(.2, 1.25, .4, 1) both; }
+.search-room.is-hinting .clue-items { animation-delay: .07s; }
+.search-room.is-hinting .clue-tv { animation-delay: .14s; }
+@keyframes clue-hint-in { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+.clue-marker:hover { background: #d9ff76; box-shadow: 3px 7px 0 #252820; transform: translate(-50%, calc(-50% - 3px)) rotate(0); }
+.clue-marker span { display: grid; place-items: center; width: 26px; height: 26px; border: 1.5px solid #252820; border-radius: 50%; background: #f4db72; font: 500 11px/1 'DM Mono', monospace; }
+.clue-marker strong { font-size: 13px; }
+.clue-map { left: 38%; top: 53%; }
+.clue-items { left: 55%; top: 82%; }
+.clue-tv { left: 72%; top: 48%; }
+.return-station { position: absolute; z-index: 3; left: clamp(22px, 5vw, 74px); bottom: clamp(23px, 4vh, 52px); padding: 9px 14px; border: 2px solid #252820; border-radius: 100px; background: #fffaf0; box-shadow: 3px 4px 0 #252820; color: #252820; cursor: pointer; font-size: 12px; font-weight: 800; }
+.return-station:hover { background: #f4db72; }
+.clue-dialog { width: min(430px, calc(100vw - 36px)); padding: 27px 28px 24px; border: 2px solid #252820; border-radius: 20px; background: #fffaf0; box-shadow: 7px 9px 0 #252820; color: #252820; }
+.clue-dialog::backdrop { background: rgba(20, 26, 44, .54); backdrop-filter: blur(3px); }
+.clue-close { position: absolute; top: 12px; right: 15px; width: 28px; height: 28px; border: 0; background: transparent; color: #252820; cursor: pointer; font-size: 27px; line-height: 1; }
+.clue-dialog-kicker { color: #6e746e; font: 500 11px/1.4 'DM Mono', monospace; }
+.clue-dialog h2 { margin: 10px 0 12px; font-size: 27px; }
+.clue-dialog-section + .clue-dialog-section { margin-top: 17px; }
+.clue-dialog-section strong { display: inline-block; margin-bottom: 6px; color: #1d765f; font-size: 12px; letter-spacing: .08em; }
+.clue-dialog-section p { margin: 0; font-size: 15px; line-height: 1.75; }
+button:focus-visible, a:focus-visible { outline: 3px solid #3477c6; outline-offset: 4px; }
+@media (max-width: 900px) {
+  .scene { background-position: 44% center; }
+  .progress { top: 100px; right: 24px; }
+  .npc { left: 67%; width: clamp(210px, 31vw, 310px); bottom: 20%; }
+  .thief { left: 88%; bottom: 18%; width: clamp(130px, 20vw, 190px); }
+  .dialogue { width: min(510px, 58vw); }
+  .scene-label { left: 42%; top: 25%; }
+}
+@media (max-width: 650px) {
+  .scene { background-size: auto 100%; background-position: 49% center; }
+  .search-room { background-image: url('./assets/clue-room-mobile.jpg'); background-position: center center; }
+  .scene-glow-wide { display: none; }
+  .scene-glow-mobile { display: block; }
+  .scene-wash { background: linear-gradient(0deg, rgba(247,241,228,.5), transparent 45%); }
+  .game-header { padding: 20px 18px; align-items: center; }
+  .game-brand { gap: 7px; padding: 7px 11px 8px 7px; border-radius: 13px; box-shadow: 3px 4px 0 #252820; }
+  .brand-icon { width: 31px; height: 31px; border-radius: 8px; font-size: 20px; }
+  .brand-kicker { font-size: 8px; }
+  .game-brand h1 { font-size: 13px; }
+  .back-home { padding: 8px 10px; font-size: 11px; }
+  .progress { top: 99px; right: 18px; width: 147px; padding: 10px 12px; border-radius: 13px; box-shadow: 3px 4px 0 #252820; }
+  .progress-top { font-size: 11px; gap: 4px; }
+  .progress-top strong { font-size: 18px; }
+  .progress-top small { font-size: 10px; }
+  .progress-slots { gap: 5px; margin: 8px 0 0; }
+  .progress-slot { width: 23px; height: 23px; font-size: 10px; }
+  .progress p { display: none; }
+  .scene-label { top: 28%; left: 8%; max-width: 170px; font-size: 10px; line-height: 1.4; }
+  .npc { left: 61.8%; bottom: 33%; width: min(50vw, 255px); }
+  .npc figcaption { bottom: 1%; font-size: 10px; }
+  .thief { left: 18%; bottom: 34%; width: min(34vw, 145px); transform: translateX(-50%) rotate(-5deg); }
+  .thief figcaption { left: 15%; padding: 3px 7px; font-size: 9px; }
+  .dialogue { left: 18px; right: 18px; bottom: 24px; width: auto; }
+  .dialogue { min-height: 214px; padding: 17px 18px; }
+  .dialogue::after { top: -14px; right: 29%; transform: rotate(-45deg); }
+  .dialogue-text { margin: 14px 0 17px; font-size: clamp(21px, 5.5vw, 27px); }
+  .dialogue-hint { font-size: 10px; }
+  .next-button { min-height: 39px; padding: 7px 13px; font-size: 12px; }
+  .search-guide { top: max(84px, 10%); bottom: auto; left: 18px; width: min(205px, 54vw); padding: 10px 12px; }
+  .search-guide-kicker { font-size: 8px; }
+  .search-guide-title { font-size: 15px; }
+  .search-guide-copy { font-size: 10px; }
+  .scene-target-map { left: 2%; top: 26%; width: 53%; height: 21%; }
+  .scene-target-tv { left: 60%; top: 40%; width: 34%; height: 12%; }
+  .scene-target-items { left: 30%; top: 68%; width: 55%; height: 10%; }
+  .clue-marker { padding: 4px 8px 4px 5px; gap: 4px; }
+  .clue-marker span { width: 21px; height: 21px; font-size: 9px; }
+  .clue-marker strong { font-size: 10px; }
+  .clue-map { left: 28%; top: 47%; }
+  .clue-tv { left: 76%; top: 52%; }
+  .clue-items { left: 52%; top: 81%; }
+  .return-station { left: 18px; bottom: 20px; font-size: 10px; padding: 7px 10px; }
+}
+@media (max-height: 680px) and (min-width: 651px) {
+  .npc { width: min(23vw, 280px); bottom: 5%; }
+  .thief { width: min(17vw, 170px); bottom: 5%; }
+  .dialogue { min-height: 185px; bottom: 20px; padding: 16px 20px; }
+  .dialogue-text { margin: 10px 0; font-size: 23px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .game.is-searching .world-track { transition-delay: 0ms; }
+}
