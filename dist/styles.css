@@ -13,6 +13,15 @@ button { font: inherit; }
 .scene { z-index: -2; background: url('./assets/gift-station-night.jpg') center center / cover no-repeat; }
 .scene-wash { z-index: -1; background: linear-gradient(90deg, rgba(248,243,233,.30), transparent 50%), linear-gradient(0deg, rgba(248,243,233,.25), transparent 45%); }
 .search-room { background: url('./assets/clue-room-wide.jpg') center center / cover no-repeat; }
+.scene-glow { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.scene-glow-mobile { display: none; }
+.scene-glow-object { opacity: 0; transition: opacity .18s ease; filter: drop-shadow(0 0 11px #fff1a0) drop-shadow(0 0 17px #fbe07c); }
+.scene-glow-object image { filter: brightness(1.24) saturate(1.28); }
+.scene-glow-object path { fill: none; stroke: #fff4b6; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: .8; }
+.scene-glow-items use { fill: none; stroke: #fff4b6; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; opacity: .5; }
+.search-room[data-active-object="clue-1"] .scene-glow-map,
+.search-room[data-active-object="clue-2"] .scene-glow-items,
+.search-room[data-active-object="clue-3"] .scene-glow-tv { opacity: 1; }
 .game-header { position: relative; z-index: 4; display: flex; align-items: flex-start; justify-content: space-between; padding: clamp(20px, 3.3vw, 48px) clamp(20px, 4.8vw, 72px); }
 .game-brand { display: flex; align-items: center; gap: 12px; padding: 10px 18px 12px 12px; border: 2px solid #252820; border-radius: 18px; background: #fffaf0; box-shadow: 4px 5px 0 #252820; transform: rotate(-2deg); }
 .brand-icon { display: grid; place-items: center; width: 40px; height: 40px; border: 2px solid #252820; border-radius: 12px; background: #f4db72; font-size: 26px; line-height: 1; }
@@ -57,12 +66,26 @@ button { font: inherit; }
 .next-button:hover { transform: translateY(-3px); box-shadow: 2px 6px 0 #252820; }
 .next-button:active { transform: translateY(2px); box-shadow: 1px 1px 0 #252820; }
 .next-button span { font-size: 18px; }
-.search-guide { position: absolute; z-index: 2; bottom: clamp(82px, 13vh, 145px); left: clamp(22px, 5vw, 74px); width: min(285px, 28vw); padding: 15px 18px; border: 2px solid #252820; border-radius: 16px; background: #fffaf0; box-shadow: 4px 5px 0 #252820; transform: rotate(-2deg); }
-.search-guide > span { display: block; color: #69766a; font: 500 10px/1.4 'DM Mono', monospace; letter-spacing: .08em; }
-.search-guide h2 { margin: 5px 0 4px; font-size: clamp(16px, 1.65vw, 23px); line-height: 1.3; }
-.search-guide p { margin: 0; color: #626962; font-size: 12px; }
-.search-guide h2:focus { outline: none; }
+.search-guide { position: absolute; z-index: 2; bottom: clamp(82px, 13vh, 145px); left: clamp(22px, 5vw, 74px); width: min(285px, 28vw); display: block; padding: 15px 18px; border: 2px solid #252820; border-radius: 16px; background: #fffaf0; color: inherit; box-shadow: 4px 5px 0 #252820; text-align: left; cursor: pointer; transform: rotate(-2deg); transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease; }
+.search-guide:hover { background: #fffdf6; box-shadow: 4px 8px 0 #252820; transform: rotate(-2deg) translateY(-3px); }
+.search-room.is-hinting .search-guide { background: #f3f8df; }
+.search-guide-kicker { display: block; color: #69766a; font: 500 10px/1.4 'DM Mono', monospace; letter-spacing: .08em; }
+.search-guide-title { display: block; margin: 5px 0 4px; font-size: clamp(16px, 1.65vw, 23px); font-weight: 800; line-height: 1.3; }
+.search-guide-copy { display: block; color: #626962; font-size: 12px; font-weight: 500; line-height: 1.45; }
+.scene-target { position: absolute; z-index: 2; display: block; padding: 0; border: 0; border-radius: 12px; background: transparent; cursor: pointer; touch-action: manipulation; }
+.scene-target:focus-visible { outline: none; }
+.scene-target::after { position: absolute; top: -17px; right: -9px; width: 30px; height: 30px; background: #fff4ad; clip-path: polygon(50% 0, 60% 39%, 100% 50%, 60% 61%, 50% 100%, 40% 61%, 0 50%, 40% 39%); content: ''; filter: drop-shadow(0 0 7px #ffe487); opacity: 0; pointer-events: none; transform: scale(.5) rotate(-20deg); transition: opacity .18s ease, transform .18s ease; }
+.scene-target-items::after { top: auto; right: 8px; bottom: -4px; }
+.scene-target:hover::after, .scene-target:focus-visible::after, .scene-target:active::after { opacity: 1; transform: scale(1) rotate(0); }
+.scene-target-map { left: 24%; top: 9%; width: 30%; height: 39%; }
+.scene-target-items { left: 44%; top: 62%; width: 26%; height: 16%; }
+.scene-target-tv { left: 64%; top: 25%; width: 17%; height: 22%; }
 .clue-marker { position: absolute; z-index: 3; display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px 6px 7px; border: 2px solid #252820; border-radius: 100px; background: #fffaf0; color: #252820; box-shadow: 3px 4px 0 #252820; cursor: pointer; white-space: nowrap; transform: translate(-50%, -50%) rotate(-3deg); transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease; }
+.clue-marker[hidden] { display: none !important; }
+.search-room.is-hinting .clue-marker { animation: clue-hint-in .34s cubic-bezier(.2, 1.25, .4, 1) both; }
+.search-room.is-hinting .clue-items { animation-delay: .07s; }
+.search-room.is-hinting .clue-tv { animation-delay: .14s; }
+@keyframes clue-hint-in { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
 .clue-marker:hover { background: #d9ff76; box-shadow: 3px 7px 0 #252820; transform: translate(-50%, calc(-50% - 3px)) rotate(0); }
 .clue-marker span { display: grid; place-items: center; width: 26px; height: 26px; border: 1.5px solid #252820; border-radius: 50%; background: #f4db72; font: 500 11px/1 'DM Mono', monospace; }
 .clue-marker strong { font-size: 13px; }
@@ -76,8 +99,9 @@ button { font: inherit; }
 .clue-close { position: absolute; top: 12px; right: 15px; width: 28px; height: 28px; border: 0; background: transparent; color: #252820; cursor: pointer; font-size: 27px; line-height: 1; }
 .clue-dialog-kicker { color: #6e746e; font: 500 11px/1.4 'DM Mono', monospace; }
 .clue-dialog h2 { margin: 10px 0 12px; font-size: 27px; }
-.clue-dialog p { margin: 0 0 21px; font-size: 15px; line-height: 1.75; }
-.clue-locked { display: inline-block; padding: 6px 10px; border: 1.5px dashed #929a91; border-radius: 7px; color: #657065; font-size: 11px; font-weight: 800; }
+.clue-dialog-section + .clue-dialog-section { margin-top: 17px; }
+.clue-dialog-section strong { display: inline-block; margin-bottom: 6px; color: #1d765f; font-size: 12px; letter-spacing: .08em; }
+.clue-dialog-section p { margin: 0; font-size: 15px; line-height: 1.75; }
 button:focus-visible, a:focus-visible { outline: 3px solid #3477c6; outline-offset: 4px; }
 @media (max-width: 900px) {
   .scene { background-position: 44% center; }
@@ -90,6 +114,8 @@ button:focus-visible, a:focus-visible { outline: 3px solid #3477c6; outline-offs
 @media (max-width: 650px) {
   .scene { background-size: auto 100%; background-position: 49% center; }
   .search-room { background-image: url('./assets/clue-room-mobile.jpg'); background-position: center center; }
+  .scene-glow-wide { display: none; }
+  .scene-glow-mobile { display: block; }
   .scene-wash { background: linear-gradient(0deg, rgba(247,241,228,.5), transparent 45%); }
   .game-header { padding: 20px 18px; align-items: center; }
   .game-brand { gap: 7px; padding: 7px 11px 8px 7px; border-radius: 13px; box-shadow: 3px 4px 0 #252820; }
@@ -116,9 +142,12 @@ button:focus-visible, a:focus-visible { outline: 3px solid #3477c6; outline-offs
   .dialogue-hint { font-size: 10px; }
   .next-button { min-height: 39px; padding: 7px 13px; font-size: 12px; }
   .search-guide { top: max(84px, 10%); bottom: auto; left: 18px; width: min(205px, 54vw); padding: 10px 12px; }
-  .search-guide > span { font-size: 8px; }
-  .search-guide h2 { font-size: 15px; }
-  .search-guide p { font-size: 10px; }
+  .search-guide-kicker { font-size: 8px; }
+  .search-guide-title { font-size: 15px; }
+  .search-guide-copy { font-size: 10px; }
+  .scene-target-map { left: 2%; top: 26%; width: 53%; height: 21%; }
+  .scene-target-tv { left: 60%; top: 40%; width: 34%; height: 12%; }
+  .scene-target-items { left: 30%; top: 68%; width: 55%; height: 10%; }
   .clue-marker { padding: 4px 8px 4px 5px; gap: 4px; }
   .clue-marker span { width: 21px; height: 21px; font-size: 9px; }
   .clue-marker strong { font-size: 10px; }

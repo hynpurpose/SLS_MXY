@@ -8,6 +8,9 @@
   <title>礼物寄存站 · 2026 生日任务</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
   <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./map-stage.css" />
+  <link rel="stylesheet" href="./tv-stage.css" />
+  <link rel="stylesheet" href="./memory-stage.css" />
   <script type="module" src="./script.js"></script>
 </head>
 <body>
@@ -53,14 +56,57 @@
       </section>
 
       <section class="room search-room" data-search-room inert aria-label="寻找三条线索的房间">
-        <div class="search-guide">
-          <span>THE SEARCH BEGINS · 3 CLUES</span>
-          <h2 tabindex="-1" data-search-title>找找看，哪里不对劲？</h2>
-          <p>点开房间里三个可疑的地方。</p>
-        </div>
-        <button class="clue-marker clue-map" type="button" data-clue="clue-1" aria-label="查看线索一：墙上的地图"><span>01</span><strong>墙上的地图</strong></button>
-        <button class="clue-marker clue-items" type="button" data-clue="clue-2" aria-label="查看线索二：地上散落的物品"><span>02</span><strong>散落的物品</strong></button>
-        <button class="clue-marker clue-tv" type="button" data-clue="clue-3" aria-label="查看线索三：电视机"><span>03</span><strong>电视机</strong></button>
+        <svg class="scene-glow scene-glow-wide" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <clipPath id="glow-map-wide"><path d="M408 87 890 82 894 447 409 447Z" /></clipPath>
+            <clipPath id="glow-tv-wide"><path d="M1083 240 Q1100 235 1305 238 L1310 431 Q1300 438 1081 432Z" /></clipPath>
+            <path id="floor-shapes-wide" d="M750 633 852 603 895 642 790 673Z M958 632 C944 602 929 598 913 600 C899 602 897 614 905 624 C914 633 938 635 956 642Z M968 634 C994 620 1018 622 1029 632 C1036 640 1026 652 1014 650 C993 648 975 641 968 643Z M957 645 C949 657 930 658 913 659 C895 658 883 660 877 670 C875 676 880 682 890 687 C888 694 879 695 869 692 L867 703 C880 703 896 698 900 689 C902 681 897 677 903 673 C910 667 927 671 944 665 C960 659 968 649 968 641Z M957 629 Q963 627 969 633 L966 645 Q959 649 954 640Z M932 673 936 671 947 674 949 671 957 675 963 673 974 677 979 675 993 679 999 678 1010 681 1013 680 1024 684 1024 691 1030 694 1027 701 1032 706 1026 711 1025 717 1018 720 1016 725 1009 725 1004 730 994 728 989 732 974 727 967 729 951 725 943 724 933 721 923 720 915 716 920 710 915 707 921 700 921 695 927 692 926 687 932 684Z M1079 642 1151 654 1125 718 1049 706Z" />
+            <clipPath id="glow-items-wide"><use href="#floor-shapes-wide" /></clipPath>
+          </defs>
+          <g class="scene-glow-object scene-glow-map" data-glow="clue-1">
+            <image href="./assets/clue-room-wide.jpg" width="1672" height="941" clip-path="url(#glow-map-wide)" />
+            <path d="M408 87 890 82 894 447 409 447Z" />
+          </g>
+          <g class="scene-glow-object scene-glow-tv" data-glow="clue-3">
+            <image href="./assets/clue-room-wide.jpg" width="1672" height="941" clip-path="url(#glow-tv-wide)" />
+            <path d="M1083 240 Q1100 235 1305 238 L1310 431 Q1300 438 1081 432Z" />
+          </g>
+          <g class="scene-glow-object scene-glow-items" data-glow="clue-2">
+            <image href="./assets/clue-room-wide.jpg" width="1672" height="941" clip-path="url(#glow-items-wide)" />
+            <use href="#floor-shapes-wide" />
+          </g>
+        </svg>
+        <svg class="scene-glow scene-glow-mobile" viewBox="0 0 941 1672" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <clipPath id="glow-map-mobile"><path d="M104 441 511 439 511 769 104 769Z" /></clipPath>
+            <clipPath id="glow-tv-mobile"><path d="M570 669 Q590 664 759 669 L783 855 Q780 864 570 855Z" /></clipPath>
+            <path id="floor-shapes-mobile" d="M300 1185 412 1148 459 1186 348 1229Z M529 1166 C519 1143 510 1137 489 1137 C469 1137 465 1155 479 1164 C495 1172 517 1170 529 1177Z M540 1169 C562 1158 583 1157 603 1165 C613 1171 613 1181 604 1189 C588 1196 566 1180 541 1180Z M527 1178 C520 1193 502 1198 485 1197 C460 1194 443 1200 439 1216 C438 1228 443 1235 451 1238 C448 1243 441 1244 435 1240 L437 1247 C450 1249 466 1242 468 1229 C469 1222 459 1219 467 1211 C474 1204 488 1204 505 1205 C524 1203 534 1191 538 1179Z M527 1167 Q535 1164 542 1172 L539 1185 Q531 1188 526 1178Z M504 1222 516 1219 529 1223 535 1220 548 1225 554 1223 567 1226 575 1225 592 1230 600 1237 597 1244 603 1248 597 1254 598 1261 592 1265 590 1272 581 1276 578 1284 568 1282 562 1281 549 1279 536 1277 524 1275 512 1271 501 1269 490 1266 481 1263 481 1256 486 1251 483 1246 489 1241 488 1236 497 1231 496 1226Z M655 1185 732 1199 706 1272 616 1256Z" />
+            <clipPath id="glow-items-mobile"><use href="#floor-shapes-mobile" /></clipPath>
+          </defs>
+          <g class="scene-glow-object scene-glow-map" data-glow="clue-1">
+            <image href="./assets/clue-room-mobile.jpg" width="941" height="1672" clip-path="url(#glow-map-mobile)" />
+            <path d="M104 441 511 439 511 769 104 769Z" />
+          </g>
+          <g class="scene-glow-object scene-glow-tv" data-glow="clue-3">
+            <image href="./assets/clue-room-mobile.jpg" width="941" height="1672" clip-path="url(#glow-tv-mobile)" />
+            <path d="M570 669 Q590 664 759 669 L783 855 Q780 864 570 855Z" />
+          </g>
+          <g class="scene-glow-object scene-glow-items" data-glow="clue-2">
+            <image href="./assets/clue-room-mobile.jpg" width="941" height="1672" clip-path="url(#glow-items-mobile)" />
+            <use href="#floor-shapes-mobile" />
+          </g>
+        </svg>
+        <button class="search-guide" type="button" data-search-guide aria-expanded="false">
+          <span class="search-guide-kicker">THE SEARCH BEGINS · 3 CLUES</span>
+          <span class="search-guide-title" data-search-title>找找看，哪里不对劲？</span>
+          <span class="search-guide-copy" data-search-guide-copy>点一下，把三个可疑的地方标出来。</span>
+        </button>
+        <button class="scene-target scene-target-map" type="button" data-scene-target="clue-1" aria-label="点击墙上的地图，进入第一关"></button>
+        <button class="scene-target scene-target-items" type="button" data-scene-target="clue-2" aria-label="点击地上散落的物品，进入第二关"></button>
+        <button class="scene-target scene-target-tv" type="button" data-scene-target="clue-3" aria-label="点击电视机，进入第三关"></button>
+        <button class="clue-marker clue-map" type="button" data-clue="clue-1" hidden aria-label="查看第一关提示与玩法"><span>01</span><strong>墙上的地图</strong></button>
+        <button class="clue-marker clue-items" type="button" data-clue="clue-2" hidden aria-label="查看第二关提示与玩法"><span>02</span><strong>散落的物品</strong></button>
+        <button class="clue-marker clue-tv" type="button" data-clue="clue-3" hidden aria-label="查看第三关提示与玩法"><span>03</span><strong>电视机</strong></button>
         <button class="return-station" type="button" data-return>← 返回寄存站</button>
       </section>
     </div>
@@ -69,9 +115,167 @@
       <button class="clue-close" type="button" data-clue-close aria-label="关闭线索提示">×</button>
       <span class="clue-dialog-kicker" data-clue-number>线索 01 / 03</span>
       <h2 id="clue-dialog-title" data-clue-title></h2>
-      <p data-clue-description></p>
-      <span class="clue-locked">线索尚未解锁</span>
+      <div class="clue-dialog-section"><strong>提示</strong><p data-clue-hint></p></div>
+      <div class="clue-dialog-section"><strong>玩法</strong><p data-clue-play></p></div>
     </dialog>
+
+    <section class="memory-stage" data-memory-stage hidden inert aria-labelledby="memory-heading">
+      <header class="memory-topbar">
+        <button class="memory-back" type="button" data-memory-back>← 返回线索房间</button>
+        <span class="memory-topnote">MEMORY CARDS · 02 / 03</span>
+        <span class="memory-topcount" data-memory-count aria-label="配对进度">0 / 8 对</span>
+      </header>
+      <div class="memory-workspace">
+        <div class="memory-board-area">
+          <div class="memory-heading">
+            <span>那些小小的、特别的东西</span>
+            <h2 id="memory-heading">散落的回忆</h2>
+            <p>翻开两张，找到相同的纪念物，把我们的回忆一对对找回来。</p>
+          </div>
+          <div class="memory-table">
+            <div class="memory-grid" data-memory-grid role="group" aria-label="16 张回忆卡片"></div>
+            <div class="memory-finish" data-memory-finish hidden>
+              <div class="memory-finish-card">
+                <span>CLUE 02 / 03 · FOUND</span>
+                <div class="memory-envelope" aria-hidden="true"><span>✳</span></div>
+                <h3>第二条线索已解锁</h3>
+                <p>8 对卡片都找到了。<br />这些小小的东西，都是我们的回忆。</p>
+                <button type="button" data-memory-finish-view>再看看回忆</button>
+                <button type="button" data-memory-finish-back>返回线索房间 →</button>
+              </div>
+            </div>
+          </div>
+          <div class="memory-board-foot"><p>点卡片翻面 · 配好的卡片也可以再点开看看</p><span>不计时，慢慢来 ✦</span></div>
+        </div>
+        <aside class="memory-aside" aria-label="找回的回忆">
+          <div class="memory-notebook">
+            <div class="memory-notebook-heading"><h3>我们的回忆册</h3><span>OUR LITTLE THINGS</span></div>
+            <div class="memory-empty" data-memory-empty><span aria-hidden="true">✳</span><strong>第一段回忆，等你翻开</strong><p>每找到一对，这里就会记下一件属于我们的东西。</p></div>
+            <div class="memory-detail" data-memory-detail hidden>
+              <div class="memory-detail-illustration"><img alt="" /></div>
+              <span data-memory-category></span><h4 data-memory-title></h4><p data-memory-copy></p>
+            </div>
+            <div class="memory-collection-heading"><strong data-memory-collected>已找回 0 / 8</strong><small>点小图重温回忆</small></div>
+            <div class="memory-collection" data-memory-collection hidden></div>
+          </div>
+          <div class="memory-station-note"><img src="./assets/station-cat.png" alt="" /><p>翻错了也没关系。<br />记住位置，再试一次就好。</p></div>
+        </aside>
+      </div>
+      <p class="memory-status" data-memory-status role="status" aria-live="polite" aria-atomic="true"></p>
+      <div class="memory-mobile-recall" data-memory-mobile-recall hidden aria-hidden="true"><strong></strong><p></p></div>
+    </section>
+
+    <section class="tv-stage" data-tv-stage hidden inert aria-label="第三关：整理录像带">
+      <header class="tv-topbar">
+        <button class="tv-back" type="button" data-tv-back>← 返回线索房间</button>
+        <span class="tv-topnote">VIDEO TASK · 03 / 03</span>
+        <span class="tv-topcount" data-tv-count>已看 0 / 6</span>
+      </header>
+
+      <div class="tv-workspace">
+        <section class="tv-viewing" aria-label="观看录像">
+          <div class="tv-heading"><span>影子大盗留下的录像带</span><h2>把故事接起来</h2></div>
+          <div class="tv-set">
+            <div class="tv-antenna" aria-hidden="true"><i></i><i></i></div>
+            <div class="tv-bezel">
+              <div class="tv-screen" data-tv-screen>
+                <div class="tv-screen-placeholder" data-tv-placeholder>
+                  <div class="tv-screen-art" aria-hidden="true"><span class="tv-moon"></span><span class="tv-hill tv-hill-one"></span><span class="tv-hill tv-hill-two"></span><span class="tv-spark">✳</span></div>
+                  <span class="tv-screen-code" data-tv-screen-code>WAITING FOR TAPE</span>
+                  <strong data-tv-screen-title>选一盘录像带来播放</strong>
+                  <small data-tv-screen-time></small>
+                </div>
+                <video data-tv-video controls playsinline hidden></video>
+                <div class="tv-scanlines" aria-hidden="true"></div>
+              </div>
+              <div class="tv-controls"><span class="tv-power" aria-hidden="true"></span><span>GIFT STATION · VIDEO PLAYER</span><span class="tv-dial" aria-hidden="true">✳</span></div>
+            </div>
+            <div class="tv-feet" aria-hidden="true"><i></i><i></i></div>
+          </div>
+          <div class="tv-playback"><span data-tv-now-playing>还没有播放录像</span><div><button type="button" data-tv-replay disabled>重看这盘 ↺</button><button type="button" data-tv-arm disabled>选择位置 ↗</button></div></div>
+        </section>
+
+        <aside class="tv-tape-area" aria-label="散乱的录像带">
+          <div class="tv-drawer-top"><span>THE TAPE DRAWER</span><strong>散乱的带子</strong></div>
+          <p>点带子观看；拖到下方顺序条里。</p>
+          <div class="tv-tape-shelf" data-tv-shelf></div>
+          <div class="tv-npc-note"><img src="./assets/station-cat.png" alt="" /><p>影子大盗把播放顺序弄乱了。看完录像，再把带子排回去。</p></div>
+        </aside>
+
+        <section class="tv-order-area" aria-label="录像带播放顺序">
+          <div class="tv-order-heading"><div><span>PLAY ORDER</span><h3>播放顺序</h3></div><small data-tv-placed>0 / 6 已放入</small></div>
+          <div class="tv-order-slots" data-tv-slots></div>
+          <div class="tv-order-bottom"><p data-tv-feedback role="status" aria-live="polite">看完全部录像并放好带子后核对；带子可以反复调整。</p><button class="tv-check" type="button" data-tv-check disabled>核对顺序 →</button></div>
+        </section>
+      </div>
+      <div class="tv-mobile-placer" data-tv-mobile-placer hidden><span data-tv-mobile-label></span><button type="button" data-tv-mobile-arm>选择位置 ↗</button></div>
+      <div class="tv-drag-ghost" data-tv-ghost hidden aria-hidden="true"></div>
+      <div class="tv-finish" data-tv-finish hidden><div class="tv-finish-card"><span>CLUE 03 / 03 · FOUND</span><div aria-hidden="true">✳</div><h3>第三条线索已解锁</h3><p>录像带已经排回正确顺序。</p><button type="button" data-tv-finish-view>查看录像带</button><button type="button" data-tv-finish-back>返回线索房间 →</button></div></div>
+    </section>
+
+    <section class="map-stage" data-map-stage hidden inert aria-label="第一关：旅行照片地图册">
+      <header class="atlas-topbar">
+        <button class="atlas-back" type="button" data-map-back>← 返回线索房间</button>
+        <span class="atlas-topnote">MAP TASK · 01 / 03</span>
+        <span class="atlas-topcount"><strong data-map-count>0</strong> / 17 张照片归位</span>
+      </header>
+
+      <div class="atlas-sheet">
+        <aside class="atlas-story">
+          <span class="atlas-kicker">TRAVEL ATLAS</span>
+          <h2>地图册</h2>
+          <div class="atlas-doodle" aria-hidden="true"><span>✳</span><span>↝</span><span>✦</span></div>
+          <div class="atlas-nav-label">选择地图页</div>
+          <div class="atlas-view-list" data-map-views role="tablist" aria-label="地图区域"></div>
+        </aside>
+
+        <section class="atlas-map-panel" aria-label="旅行地图">
+          <div class="atlas-map-heading">
+            <div><span data-map-view-code>01 / 08 · OVERVIEW</span><h3 data-map-view-title>地图</h3></div>
+          </div>
+          <div class="atlas-map-scroll" data-map-scroll>
+            <div class="atlas-map-canvas" data-map-canvas role="group" aria-label="旅行地图">
+              <img data-map-image src="./assets/atlas-all.svg" alt="完整中国及周边国家与日本的地图" width="1200" height="860" draggable="false" />
+              <div class="atlas-region-markers" data-map-regions></div>
+              <svg class="atlas-city-markers" data-map-cities viewBox="0 0 1200 860" aria-label="城市名称"></svg>
+              <div class="atlas-pins" data-map-pins aria-label="已归位的旅行照片"></div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="atlas-photo-desk" aria-label="当前旅行照片">
+          <span class="atlas-desk-kicker">PHOTO CARD</span>
+          <h3>待放照片</h3>
+          <div class="atlas-card-pad">
+            <div class="atlas-photo-card" data-map-card role="img" aria-label="拖动当前旅行照片到地图">
+              <span class="atlas-card-pin" aria-hidden="true"></span>
+              <div class="atlas-photo-window" data-map-card-photo></div>
+              <div class="atlas-card-caption"><span data-map-card-index>01 / 17</span></div>
+            </div>
+          </div>
+          <small class="atlas-dev-label" data-map-dev hidden></small>
+          <button class="atlas-card-focus" type="button" data-map-next hidden>下一张照片 →</button>
+          <p class="atlas-feedback" data-map-feedback role="status" aria-live="polite"></p>
+          <div class="atlas-journey-top"><strong>已放照片</strong><span data-map-stamp-count>0 / 17</span></div>
+          <div class="atlas-journey" data-map-stamps aria-label="17 站旅行进度"></div>
+          <button class="atlas-reset" type="button" data-map-reset hidden>从第一张重新摆放</button>
+        </aside>
+      </div>
+
+      <div class="atlas-intro" data-map-intro>
+        <figure class="atlas-intro-cat"><img src="./assets/station-cat.png" alt="" width="640" height="960" /><figcaption>夜班站长</figcaption></figure>
+        <section class="atlas-intro-bubble" aria-label="夜班站长介绍第一关">
+          <div class="atlas-intro-head"><strong>夜班站长 ✳</strong><span data-map-intro-number>01 / 03</span></div>
+          <p data-map-intro-text aria-live="polite"></p>
+          <button type="button" data-map-intro-next>继续听 →</button>
+        </section>
+      </div>
+
+      <div class="atlas-finish" data-map-finish hidden>
+        <div class="atlas-finish-card"><span>CLUE 01 / 03 · FOUND</span><div aria-hidden="true">✳</div><h3>第一条线索已解锁</h3><p>17 / 17 张照片已固定。</p><button type="button" data-map-finish-view>查看地图</button><button type="button" data-map-finish-back>返回线索房间 →</button></div>
+      </div>
+      <div class="atlas-drag-card" data-map-drag-card hidden aria-hidden="true"></div>
+    </section>
   </main>
 </body>
 </html>

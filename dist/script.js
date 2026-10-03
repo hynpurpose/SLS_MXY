@@ -1,4 +1,7 @@
 import { STAGE_IDS, getProgress } from './state.js';
+import { setupMapStage } from './map-stage.js';
+import { setupTvStage } from './tv-stage.js';
+import { setupMemoryStage } from './memory-stage.js';
 
 const lines = [
   '嘘，欢迎来到礼物寄存站。今晚，我一直在等你。',
@@ -10,9 +13,21 @@ const lines = [
 ];
 
 const cluePreviews = {
-  'clue-1': { number: '01', title: '墙上的地图', description: '地图上的路线似乎通向某个地方。这条线索的挑战，即将从这里开始。' },
-  'clue-2': { number: '02', title: '地上散落的物品', description: '信封、缎带、旧票和照片散了一地。真正重要的东西，还得仔细找找。' },
-  'clue-3': { number: '03', title: '电视机', description: '屏幕还没有亮起来。它会是第三条线索的入口。' }
+  'clue-1': {
+    number: '01', title: '墙上的地图',
+    hint: '旅行照片散落了，先想想每张照片属于哪里。',
+    play: '把照片逐张拖到地图上的对应位置，固定全部 17 张后找到线索。'
+  },
+  'clue-2': {
+    number: '02', title: '地上散落的物品',
+    hint: '散落的卡片里，藏着我们送过的礼物和一起留下的回忆。',
+    play: '每次翻开两张卡片，找到相同的纪念物。配成全部 8 对，找回第二条线索。不计时，也不限制次数。'
+  },
+  'clue-3': {
+    number: '03', title: '电视机',
+    hint: '影子大盗把录像带的播放顺序弄乱了。',
+    play: '逐盘观看录像，把带子拖进下方的播放顺序；已放的带子也能继续调整。'
+  }
 };
 
 const game = document.querySelector('.game');
@@ -25,13 +40,37 @@ const thief = document.querySelector('[data-thief]');
 const npc = document.querySelector('[data-npc]');
 const introRoom = document.querySelector('[data-intro-room]');
 const searchRoom = document.querySelector('[data-search-room]');
-const searchTitle = document.querySelector('[data-search-title]');
+const searchGuide = document.querySelector('[data-search-guide]');
+const searchGuideCopy = document.querySelector('[data-search-guide-copy]');
+const clueMarkers = [...document.querySelectorAll('[data-clue]')];
+const sceneTargets = [...document.querySelectorAll('[data-scene-target]')];
 const clueDialog = document.querySelector('[data-clue-dialog]');
 const closeClue = document.querySelector('[data-clue-close]');
 const returnButton = document.querySelector('[data-return]');
+const mapButton = document.querySelector('[data-scene-target="clue-1"]');
+const tvButton = document.querySelector('[data-scene-target="clue-3"]');
+const memoryButton = document.querySelector('[data-scene-target="clue-2"]');
 let lastClueButton = null;
 let currentLine = 0;
 const transitionTime = matchMedia('(prefers-reduced-motion: reduce)').matches ? 20 : 1650;
+const objectResponseTime = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 170;
+let enteringStage = false;
+const mapStage = setupMapStage({
+  game,
+  searchRoom,
+  onProgressChange: renderProgress,
+  onClose: () => mapButton.focus({ preventScroll: true }),
+});
+const tvStage = setupTvStage({
+  searchRoom,
+  onProgressChange: renderProgress,
+  onClose: () => tvButton.focus({ preventScroll: true }),
+});
+const memoryStage = setupMemoryStage({
+  searchRoom,
+  onProgressChange: renderProgress,
+  onClose: () => memoryButton.focus({ preventScroll: true }),
+});
 
 function renderLine() {
   text.textContent = lines[currentLine];
@@ -57,8 +96,19 @@ function advance() {
   window.setTimeout(() => {
     if (!game.classList.contains('is-searching')) return;
     npc.hidden = true;
-    if (!clueDialog.open) searchTitle.focus({ preventScroll: true });
+    if (!clueDialog.open) searchGuide.focus({ preventScroll: true });
   }, transitionTime);
+}
+
+function setHints(visible) {
+  searchRoom.classList.toggle('is-hinting', visible);
+  searchGuide.setAttribute('aria-expanded', String(visible));
+  searchGuideCopy.textContent = visible
+    ? '三个地方已经标出来了。再点一次可以收起。'
+    : '点一下，把三个可疑的地方标出来。';
+  clueMarkers.forEach((marker) => {
+    marker.hidden = !visible;
+  });
 }
 
 function renderProgress() {
@@ -72,13 +122,18 @@ function renderProgress() {
   });
 }
 
-// The game is isolated from the main site. This local return link is hidden
-// on the hosted game until a public main-site URL is available.
+// The seasonal game stays separate from the main site. On a future private
+// server, replace this local return URL with the main site's own address.
 const homeLink = document.querySelector('[data-home-link]');
 if (location.hostname !== '127.0.0.1' && location.hostname !== 'localhost') homeLink.hidden = true;
 
 next.addEventListener('click', advance);
+searchGuide.addEventListener('click', () => {
+  setHints(!searchRoom.classList.contains('is-hinting'));
+});
+
 returnButton.addEventListener('click', () => {
+  setHints(false);
   npc.hidden = false;
   introRoom.inert = false;
   searchRoom.inert = true;
@@ -90,13 +145,14 @@ returnButton.addEventListener('click', () => {
   }, transitionTime);
 });
 
-document.querySelectorAll('[data-clue]').forEach((button) => {
+clueMarkers.forEach((button) => {
   button.addEventListener('click', () => {
     const clue = cluePreviews[button.dataset.clue];
     lastClueButton = button;
     document.querySelector('[data-clue-number]').textContent = `线索 ${clue.number} / 03`;
     document.querySelector('[data-clue-title]').textContent = clue.title;
-    document.querySelector('[data-clue-description]').textContent = clue.description;
+    document.querySelector('[data-clue-hint]').textContent = clue.hint;
+    document.querySelector('[data-clue-play]').textContent = clue.play;
     clueDialog.showModal();
   });
 });
@@ -106,5 +162,34 @@ clueDialog.addEventListener('click', (event) => {
 });
 clueDialog.addEventListener('close', () => lastClueButton?.focus());
 
+sceneTargets.forEach((target) => {
+  const id = target.dataset.sceneTarget;
+  const lightObject = () => { searchRoom.dataset.activeObject = id; };
+  const dimObject = () => {
+    if (searchRoom.dataset.activeObject === id && !enteringStage) delete searchRoom.dataset.activeObject;
+  };
+  target.addEventListener('pointerenter', lightObject);
+  target.addEventListener('pointerleave', dimObject);
+  target.addEventListener('focus', lightObject);
+  target.addEventListener('blur', dimObject);
+  target.addEventListener('click', () => {
+    if (enteringStage) return;
+    enteringStage = true;
+    lightObject();
+    window.setTimeout(() => {
+      enteringStage = false;
+      delete searchRoom.dataset.activeObject;
+      if (id === 'clue-1') {
+        mapStage.open();
+        return;
+      }
+      if (id === 'clue-3') {
+        tvStage.open();
+        return;
+      }
+      if (id === 'clue-2') memoryStage.open();
+    }, objectResponseTime);
+  });
+});
 renderProgress();
 renderLine();

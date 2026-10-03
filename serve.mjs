@@ -2,15 +2,21 @@ import { createReadStream } from "node:fs";
 import { stat } from "node:fs/promises";
 import { createServer } from "node:http";
 import { extname, join, normalize } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = join(process.cwd(), "dist");
-const port = 5202;
+const root = fileURLToPath(new URL("./dist/", import.meta.url));
+const port = Number(process.env.PORT || 5202);
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
   ".png": "image/png",
   ".svg": "image/svg+xml",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
+  ".mov": "video/quicktime",
 };
 
 const server = createServer(async (request, response) => {
@@ -27,8 +33,29 @@ const server = createServer(async (request, response) => {
   try {
     const file = await stat(filePath);
     if (!file.isFile()) throw new Error("Not a file");
+    const contentType = mimeTypes[extname(filePath)] ?? "application/octet-stream";
+    const isVideo = contentType.startsWith("video/");
+    const range = isVideo && /^bytes=(\d*)-(\d*)$/.exec(request.headers.range ?? "");
+    if (range) {
+      const start = range[1] ? Number(range[1]) : Math.max(0, file.size - Number(range[2]));
+      const end = range[1] && range[2] ? Math.min(file.size - 1, Number(range[2])) : file.size - 1;
+      if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start > end || start >= file.size) {
+        response.writeHead(416, { "Content-Range": `bytes */${file.size}` }).end();
+        return;
+      }
+      response.writeHead(206, {
+        "Content-Type": contentType,
+        "Content-Range": `bytes ${start}-${end}/${file.size}`,
+        "Content-Length": end - start + 1,
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "no-cache",
+      });
+      createReadStream(filePath, { start, end }).pipe(response);
+      return;
+    }
     response.writeHead(200, {
-      "Content-Type": mimeTypes[extname(filePath)] ?? "application/octet-stream",
+      "Content-Type": contentType,
+      ...(isVideo ? { "Accept-Ranges": "bytes" } : {}),
       "Cache-Control": "no-cache",
     });
     createReadStream(filePath).pipe(response);

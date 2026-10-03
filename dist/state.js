@@ -1,25 +1,21 @@
-// The seasonal game's state boundary. Future levels can import completeStage.
+// This one-time birthday game starts fresh on each page load. Progress remains
+// available while moving between rooms, but a refresh begins a new playthrough.
 export const STAGE_IDS = Object.freeze(['clue-1', 'clue-2', 'clue-3']);
-const KEY = 'sm-birthday-2026:clues:v1';
+let completedStages = [];
 
 export function getProgress() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
-    const validStages = Array.isArray(saved.completedStages) ? saved.completedStages : [];
-    return { completedStages: STAGE_IDS.filter((id) => validStages.includes(id)) };
-  } catch {
-    return { completedStages: [] };
-  }
+  return { completedStages: [...completedStages] };
 }
 
 export function completeStage(stageId) {
+  if (!STAGE_IDS.includes(stageId)) throw new Error('Unknown stage');
+  if (!completedStages.includes(stageId)) completedStages.push(stageId);
+  return getProgress();
+}
+
+export function resetFromStage(stageId) {
   const stageIndex = STAGE_IDS.indexOf(stageId);
   if (stageIndex < 0) throw new Error('Unknown stage');
-  const completedStages = getProgress().completedStages;
-  if (stageIndex > 0 && !completedStages.includes(STAGE_IDS[stageIndex - 1])) {
-    throw new Error('Previous stage is still locked');
-  }
-  if (!completedStages.includes(stageId)) completedStages.push(stageId);
-  localStorage.setItem(KEY, JSON.stringify({ completedStages }));
+  completedStages = completedStages.filter((id) => STAGE_IDS.indexOf(id) < stageIndex);
   return getProgress();
 }
