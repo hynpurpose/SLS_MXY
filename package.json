@@ -1,0 +1,14 @@
+{
+  "name": "sm-memories",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "S&M website and the 2026 birthday gift game",
+  "scripts": {
+    "dev:website": "node apps/website/serve.mjs",
+    "dev:game": "node apps/gift-game/serve.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

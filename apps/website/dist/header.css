@@ -7,8 +7,8 @@ html { scroll-padding-top: 90px; }
   z-index: 50;
   top: 8px;
   left: 50%;
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  justify-content: space-between;
   gap: 28px;
   align-items: center;
   width: min(1200px, calc(100vw - 128px));
@@ -36,33 +36,15 @@ html { scroll-padding-top: 90px; }
 @supports not (backdrop-filter: blur(1px)) {
   .site-header { background: rgba(247, 250, 247, .94); }
 }
-.site-header .brand {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-self: start;
-  gap: 1px;
-  min-width: 0;
-  width: max-content;
-  padding: 0;
+.site-header .hero-monogram {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  transform: rotate(-3deg);
+  transition: transform .22s ease;
 }
-.brand .brand-wordmark {
-  display: block;
-  font: 600 21px/.95 "Helvetica Neue", Arial, sans-serif;
-  letter-spacing: -1.3px;
-  color: #252622;
-}
-.brand .brand-amp {
-  display: inline-block;
-  margin: 0 2px 0 1px;
-  font: italic 400 20px/.95 Georgia, "Times New Roman", serif;
-  letter-spacing: -1.5px;
-}
-.brand .brand-caption {
-  padding-left: 1px;
-  font: 400 5px/1 var(--mono);
-  letter-spacing: 1.25px;
-  color: #8c8e83;
+.site-header .hero-monogram:hover {
+  transform: rotate(0deg);
 }
 .site-header .main-nav {
   display: flex;
@@ -100,21 +82,14 @@ html { scroll-padding-top: 90px; }
 @media (max-width: 780px) {
   html { scroll-padding-top: 78px; }
   .site-header { width: calc(100vw - 50px); gap: 19px; }
-  .brand .brand-wordmark { font-size: 21px; }
-  .brand .brand-amp { font-size: 20px; }
-  .brand .brand-caption { font-size: 5px; letter-spacing: 1.25px; }
   .site-header .main-nav { gap: 22px; }
   .site-header .nav-link { font-size: 11px; }
 }
 @media (max-width: 560px) {
   html { scroll-padding-top: 72px; }
   .site-header { top: calc(8px + env(safe-area-inset-top)); width: calc(100vw - 40px); gap: 15px; padding-inline: 12px; }
-  .site-header .brand { gap: 1px; }
-  .brand .brand-wordmark { font-size: 20px; letter-spacing: -1.3px; }
-  .brand .brand-amp { font-size: 19px; margin-inline: 1px 2px; }
-  .brand .brand-caption { font-size: 5px; letter-spacing: 1.1px; }
-  .site-header .main-nav { gap: 20px; }
-  .site-header .nav-link { font-size: 11px; padding-inline: 0; }
+  .site-header .main-nav { gap: 12px; }
+  .site-header .nav-link { font-size: 10px; padding-inline: 0; }
   .site-header .nav-link:first-child { display: none; }
 }
 @media (max-width: 360px) {
